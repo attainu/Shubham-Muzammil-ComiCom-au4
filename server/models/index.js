@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
+const Product = require('./Product');
+const Orders = require('./Orders');
+const Users = require('./Users');
 
-if(process.env.NODE_ENV == 'production' || process.env.NODE_ENV == 'staging') {
-    const DB_USERNAME = process.env.DB_USERNAME;
-    const DB_PASSWORD = process.env.DB_PASSWORD;
-    const DB_URL = process.env.DB_URL;
-    var dbURL = 'mongodb+srv://'+DB_USERNAME+':'+DB_PASSWORD+'@'+DB_URL;
-}else {
-    var dbURL = 'mongodb://localhost:27017/comicom'
-}
-
+let dbURL = `mongodb+srv://comicom:sharp@cluster0-iabea.mongodb.net/test?retryWrites=true&w=majority`;
 
 function connect() {
     return mongoose.connect(dbURL, {
@@ -19,6 +14,9 @@ function connect() {
 
 module.exports = {
     models : {
+        Product : Product,
+        Users : Users,
+        Orders : Orders
     },
     connect: connect
 };
