@@ -8,14 +8,18 @@ const ordersSchema = new mongoose.Schema({
     totalPrice: {
         type: Number,
         required: true
-    }
-    product: [
-        productID:{ type : Number },
-        quantity:{ type : Number }
-    ],
+    },
+    product: {
+        productId: {
+            type: Number
+        },
+        quantity: {
+            type: Number
+        }
+    },
     transactionType: {
         type : String
-    }
+    },
     orderedDate: {
         type: Date,
         default: new Date()
