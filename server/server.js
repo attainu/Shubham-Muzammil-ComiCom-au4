@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express'
 const app = express();
-const cors = require('cors');
-const bodyParser = require('body-parser')
-const routes = require('./routes/index');
+import cors from 'cors'
+import routes from './routes/index'
+
 const db = require('./models/index.js');
 const cookieSession = require('cookie-session')
 const passport = require('passport');
@@ -11,8 +11,8 @@ const passport = require('passport');
 
 //middlewares
 app.use(cors());
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 require('./services/passport')
 // app.use(servicesPass)
