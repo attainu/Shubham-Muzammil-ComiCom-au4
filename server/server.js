@@ -2,10 +2,9 @@ import express from 'express'
 const app = express();
 import cors from 'cors'
 import routes from './routes/index'
-
-const db = require('./models/index.js');
-const cookieSession = require('cookie-session')
-const passport = require('passport');
+import {connect} from './models/index'
+import cookieSession from 'cookie-session'
+import passport from "passport";
 
 // const servicesPass = require('./services/passport')
 
@@ -31,7 +30,7 @@ app.use('/', routes.auth);
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
 const PORT = process.env.PORT || 9090;
-db.connect()
+connect()
 	.then(function () {
 		app.listen(PORT, function () {
 			console.log("Application has started in environment " + env + " and running on port: ", PORT);
