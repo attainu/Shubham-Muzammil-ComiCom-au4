@@ -2,7 +2,8 @@ import passport from 'passport'
 //const googleStrategy = require('passport-google-oauth20').Strategy;
 import {Strategy as googleStrategy} from 'passport-google-oauth20'
 import {googleClientId, googleClientSecret} from '../config/keys'
-const Users = require('../models/Users')
+//const Users = require('../models/Users')
+import {Users} from '../models/index'
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
