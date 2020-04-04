@@ -3,7 +3,6 @@ import Product from './Product'
 import Orders from './Orders'
 import Users from './Users'
 
-
 let dbURL = `mongodb+srv://comicom:sharp@cluster0-iabea.mongodb.net/test?retryWrites=true&w=majority`;
 
 function connect() {
@@ -25,4 +24,5 @@ export {
     Product,
     Users,
     Orders, 
-    connect}
+    connect
+}

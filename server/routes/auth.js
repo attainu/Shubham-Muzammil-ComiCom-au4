@@ -1,19 +1,29 @@
-const passport = require('passport');
-const router = require('express').Router();
+import passport from 'passport';
+import express from 'express';
+import controllers from '../controllers/index';
+const router = express.Router();
 
-router.get('/', (req, res)=>{
-	res.send(req.user)
-});
-
-router.get('/auth/google',passport.authenticate('google', {
-	scope: ['profile', 'email'] 
+router.get('/google',passport.authenticate('google', {
+  scope: ['profile', 'email'] 
 }));
 
-router.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
+// Successful authentication, redirect profile.
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
-    // Successful authentication, redirect home.
-    res.redirect('/');
+  res.redirect('http://localhost:3000/profile');
 });
 
-module.exports = router;
+router.get('/facebook',
+  passport.authenticate('facebook')
+);
+
+router.get("/facebook/callback",passport.authenticate('facebook',{
+  successRedirect:'http://localhost:3000/profile'
+}));
+
+router.post('/register', controllers.registerUser);
+router.post('/login', controllers.loginUser);
+router.get('/current', controllers.currentUserInfo)
+router.get('/logout',controllers.currentUserLogout)
+
+export default router;

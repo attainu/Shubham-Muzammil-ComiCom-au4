@@ -1,3 +1,4 @@
-module.exports={
-    auth: require('./auth'),
-}
+import auth from './auth';
+export default({
+    auth
+})
