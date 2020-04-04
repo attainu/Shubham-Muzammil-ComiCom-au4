@@ -5,6 +5,8 @@ import { connect } from './models/index'
 import cookieSession from 'cookie-session'
 import passport from "passport";
 import './services/passport';
+import products from "./routes/products";
+import search from './routes/search'
 
 //middlewares
 app.use(function (req, res, next) {
@@ -32,6 +34,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session())
 app.use('/auth', routes.auth);
+app.use('/products', products)
+app.use('/search', search)
+
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
