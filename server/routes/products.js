@@ -1,14 +1,31 @@
 import {Router} from 'express'
 const router = Router();
 import {Product} from '../models/index'
+import multer from 'multer'
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "./uploads");
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${file.fieldname}_${+new Date()}.jpg`);
+    }
+})
+
+const upload = multer({
+    storage
+});
 
 //post comic to db
-router.post('/', async(req, res) => {
+router.post('/', upload.single('photo'), async(req, res) => {
     try {
+        const path = req.file.path
+        console.log(path)
         const {name, description, regularPrice, discountedPrice, itemsInStock, publication, characters, tags, category, imgURL}  = req.body
         const newComic = {name, description, regularPrice, discountedPrice, itemsInStock, publication, characters, tags, category, imgURL}
-        const savedComic = await Product.create(newComic)
-        res.status(200).json(savedComic)
+        //const savedComic = await Product.create(newComic)
+        //res.status(200).json(savedComic)
+        res.json({path, newComic})
         
     } catch (error) {
         console.error(error)
