@@ -1,33 +1,39 @@
 import express from 'express'
 const app = express();
-import cors from 'cors'
 import routes from './routes/index'
-import {connect} from './models/index'
+import { connect } from './models/index'
 import cookieSession from 'cookie-session'
 import passport from "passport";
+import './services/passport';
 import products from "./routes/products";
 import search from './routes/search'
 
-// const servicesPass = require('./services/passport')
-
 //middlewares
-app.use(cors());
+app.use(function (req, res, next) {
+	res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+	res.header("Access-Control-Allow-Credentials", "true");
+	res.header("Access-Control-Allow-Methods: PUT, GET, POST");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept"
+	);
+	next();
+});
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-
-require('./services/passport')
-// app.use(servicesPass)
 
 app.use(
 	cookieSession({
 		maxAge: 30 * 24 * 60 * 60 * 1000,
-		keys: ['dfsafasdsad']
+		keys: ['dfsafasdsad'],
+		saveUninitialized: false,
+		resave: false
 	})
 )
 
 app.use(passport.initialize());
 app.use(passport.session())
-app.use('/', routes.auth);
+app.use('/auth', routes.auth);
 app.use('/products', products)
 app.use('/search', search)
 
