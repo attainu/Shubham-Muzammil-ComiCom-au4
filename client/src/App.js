@@ -1,7 +1,8 @@
 import React from 'react';
-import './App.css';
-import Signin from './Components/SignIn'
-import Signup from './Components/Signup'
+//import './App.css';
+import Dashboard from './components/Dashboard/Dashboard'
+import Signin from './components/SignIn'
+import Signup from './components/Signup'
 import {BrowserRouter,Route} from 'react-router-dom';
 import Profile from './Components/Profile';
 import Header from './Components/Header';
@@ -16,6 +17,7 @@ function App() {
       <Route path='/signin' component={Signin} />
       <Route path='/profile' component={Profile} />
       <Route path='/header' component={Header} />
+      <Route path='/dashboard' component={Dashboard} />
     </BrowserRouter>
   );
 }
