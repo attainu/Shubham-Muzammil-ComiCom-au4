@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom'
-import comic from '../styles/back2.jpg'
 import '../styles/signin.css'
+
+let comic= 'https://res.cloudinary.com/comicom/image/upload/v1586243312/Pages%20Image/Signin-Signup/back2_ubkwo5.jpg';
 
 class Signup extends Component {
 
