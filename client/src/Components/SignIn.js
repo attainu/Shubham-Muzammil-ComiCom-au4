@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom'
-import comic from '../styles/back.jpg'
 import { signUser } from '../Redux/action_creators/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faGooglePlusG } from "@fortawesome/free-brands-svg-icons"
 import '../styles/signin.css'
+
+let comic = 'https://res.cloudinary.com/comicom/image/upload/v1586243313/Pages%20Image/Signin-Signup/back_umhv8x.jpg';
 
 class Signin extends Component {
 
@@ -42,7 +43,6 @@ class Signin extends Component {
 					        </div>
                             <div className="p-t-13 p-b-9">
 						        <span className="txt1">Password</span>
-        						<a href="#" className="txt2 bo1 m-l-5">Forgot?</a>
 					        </div>
                             <div className="wrap-input100 validate-input" data-validate = "Password is required">
 						        <input onChange={(e)=>{this.handleChange(e)}} className="input100" type="password" name="password" />
