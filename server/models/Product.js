@@ -40,12 +40,13 @@ const productSchema = new mongoose.Schema({
         posters: {
             type: Array
         }
-    },
-    datecreated: {
+    }
+    /* datecreated: {
         type: Date,
         default: new Date()
-    }
+    } */
 }, {
+    timestamps : {createdAt: 'created_at', updatedAt: 'updated_at'},
     collection: 'product'
 }); 
 
