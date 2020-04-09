@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import '../styles/style.css'
+import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTruck, faDollarSign, faPhoneAlt } from "@fortawesome/free-solid-svg-icons"
 

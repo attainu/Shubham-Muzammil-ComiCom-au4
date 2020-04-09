@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import '../styles/style.css'
+import '../../styles/style.css'
 
 let imgUrl3 = 'https://res.cloudinary.com/comicom/image/upload/v1586179566/Pages%20Image/54678_jm38fm.jpg'
 let imgUrl2 = 'https://res.cloudinary.com/comicom/image/upload/v1586178462/Pages%20Image/14358_ntpkal.jpg'

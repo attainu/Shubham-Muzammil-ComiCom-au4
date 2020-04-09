@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import '../styles/style.css'
+import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
@@ -8,6 +8,7 @@ let Background1 = `https://res.cloudinary.com/comicom/image/upload/c_scale,h_450
 class Header extends Component {
 
 	render() {
+		let {wishlist, cartItems} = this.props.feature
 		return (
 			<>
 				<div className="top-bar d-none d-sm-block">
@@ -125,13 +126,13 @@ class Header extends Component {
 									<ul className="list-inline">
 										<li className="list-inline-item">
 											<a id="search" href="/a" className="nav-link">
-												<div className="icon search"><FontAwesomeIcon icon={faHeart} style={{color:"#ffd900"}}/><sup style={{color:"#ffd900"}}> 2</sup>
+												<div className="icon search"><FontAwesomeIcon icon={faHeart} style={{color:"#ffd900"}}/><sup style={{color:"#ffd900"}}>{wishlist.length}</sup>
 												</div>
 											</a>
 										</li>
 										<li className="list-inline-item">
 											<a href="cart.html" className="nav-link">
-												<div className="icon cart"><FontAwesomeIcon icon={faShoppingCart} style={{color:"#000000"}}/><sup style={{color:"#000000"}}> 2</sup>
+												<div className="icon cart"><FontAwesomeIcon icon={faShoppingCart} style={{color:"#000000"}}/><sup style={{color:"#000000"}}>{cartItems.length}</sup>
 												</div>
 											</a>
 										</li>
@@ -148,7 +149,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.auth
+		feature: state.feature
 	}
 }
 

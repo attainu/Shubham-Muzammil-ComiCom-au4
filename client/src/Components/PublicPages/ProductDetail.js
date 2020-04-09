@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getUserInfo } from "../Redux/action_creators/actions";
-import '../styles/style.css'
-// import Home from './Home';
+import { getUserInfo } from "../../Redux/action_creators/actions";
+import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faHeart } from "@fortawesome/free-solid-svg-icons"
 
@@ -14,13 +13,14 @@ class ProductDetail extends Component {
     }
 
     render() {
+        let { detail } = this.props
         return (
             <div className="details-page">
                 <div className="container">
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item text-uppercase"> <a href="index.html" className="text-primary">Home</a></li>
                         <li className="breadcrumb-item text-uppercase"> <a href="category.html" className="text-primary">Lorem</a></li>
-                        <li className="breadcrumb-item active text-uppercase">Lorem ipsum</li>
+                        <li className="breadcrumb-item active text-uppercase">Detail</li>
                     </ol>
                 </div>
                 <section className="item-details p-t-small p-b-small">
@@ -29,44 +29,40 @@ class ProductDetail extends Component {
                             <div className="col-md-6">
                                 <div data-slider-id="1" className="owl-carousel item-slider">
                                     <div className="item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="poster" />
+                                        <img src={detail.imgURL.main} alt="poster" />
                                     </div>
-                                    <div className="item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="poster" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="poster" />
-                                    </div>
-                                    <div className="item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="poster" />
-                                    </div>
+                                    {detail.imgURL.posters.map((data, index)=>{
+                                        return(
+                                            <div className="item">
+                                                <img src={data} alt="poster" />
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                                 <div data-slider-id="1" className="owl-thumbs">
                                     <button className="owl-thumb-item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="thumb" />
+                                        <img src={detail.imgURL.main} alt="thumb" />
                                     </button>
-                                    <button className="owl-thumb-item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="thumb" />
-                                    </button>
-                                    <button className="owl-thumb-item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="thumb" />
-                                    </button>
-                                    <button className="owl-thumb-item">
-                                        <img src="https://res.cloudinary.com/comicom/image/upload/v1585807052/Hulk/clean_yb0ud0.jpg" alt="thumb" />
-                                    </button>
+                                    {detail.imgURL.posters.map((data, index)=>{
+                                        return(
+                                            <button className="owl-thumb-item">
+                                                <img src={data} alt="thumb" />
+                                            </button>
+                                        )
+                                    })}
                                 </div>
                             </div>
                             <div className="col-md-6">
-                                <h1 className="h2">Lorem ipsum dolor sit amet, consectetur adipisicing elit,</h1>
-                                <div className="price d-flex justify-content-between align-items-center text-primary">$599.00</div>
+                                <h1 className="h2">{detail.name}</h1>
+                                <div className="price d-flex align-items-center"><del className="mr-3">Rs. {detail.regularPrice}</del>  Rs. {detail.discountedPrice}</div>
                                 <div className="description">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>{detail.description}</p>
                                 </div>
                                 <div className="model">
                                     <ul className="list-unstyled">
-                                        <li><span className="text-uppercase">Item No: </span>Lorem ipsum dolor sit amet, consecte</li>
-                                        <li><span className="text-uppercase">Category: </span>Lorem ipsum</li>
-                                        <li><span className="text-uppercase">Availability: </span>Lorem ipsum</li>
+                                        <li><span className="text-uppercase">Characters: </span>{detail.characters.join(" , ")}</li>
+                                        <li><span className="text-uppercase">Category: </span>{detail.category.join(" , ")}</li>
+                                        <li><span className="text-uppercase">Availability: </span>{detail.itemsInStock>0 ? "In Stock" : "Out of Stock"}</li>
                                     </ul>
                                 </div>
                                 <form action="#" method="get">
@@ -109,7 +105,7 @@ class ProductDetail extends Component {
 const mapStateToProps = (state) => {
     console.log("state here in profile", state)
     return {
-        user: state.auth
+        detail: state.product.displayProductsDetail
     }
 }
 

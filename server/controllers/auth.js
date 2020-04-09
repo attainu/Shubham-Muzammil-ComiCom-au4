@@ -2,8 +2,8 @@ import bcrypt from 'bcryptjs'
 import Users from '../models/Users'
 
 export const currentUserInfo = async (req, res) => {
-    if (req.session.user) {
-        req.session.user.password = undefined
+    if (req.user) {
+        req.password = undefined
         res.json({
             success: true,
             message: "user has successfully authenticated",
