@@ -7,6 +7,8 @@ import passport from "passport";
 import './services/passport';
 import products from "./routes/products";
 import search from './routes/search'
+import payment from './routes/payment'
+
 
 //middlewares
 app.use(function (req, res, next) {
@@ -36,6 +38,7 @@ app.use(passport.session())
 app.use('/auth', routes.auth);
 app.use('/products', products)
 app.use('/search', search)
+app.use('/payment', payment)
 
 
 // Start the app on pre defined port number
