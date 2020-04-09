@@ -26,29 +26,29 @@ const upload = multer({
 const getData = async (files) => {
   return Promise.all(files.map(async (file) => {
             const res = await cloudinary.uploader.upload(file.path)
-            //console.log(res)
             return res.url
-            //console.log(path)
         }))
 }
 
 //post comic to db
-router.post('/', upload.array('photo'), async(req, res) => {
+router.post('/', upload.array('photo'), async (req, res) => {
     try {
         const files = req.files
-        getData(files).then(path => {
+        getData(files).then(async (path) => {
             const imgURL = {
                 posters: [path[0]],
                 main: path[1]
             }
-            const {name, description, regularPrice, discountedPrice, itemsInStock, publication, characters, tags, category}  = req.body
-        
-            //console.log(path, imgURL)
+            let {name, description, regularPrice, discountedPrice, itemsInStock, publication, characters, tags, category}  = req.body
+
+            characters = JSON.parse(characters)
+            tags = JSON.parse(tags)
+            category = JSON.parse(category)
+
             const newComic = {name, description, regularPrice, discountedPrice, itemsInStock, publication, characters, tags, category, imgURL}
-            res.json({path, newComic})
-            //Uncomment this code when add comic form is ready
-            //const savedComic = await Product.create(newComic)
-            //res.status(200).json(savedComic)
+
+            const savedComic = await Product.create(newComic)
+            res.status(200).json(savedComic)
         })
     } catch (error) {
         console.error(error)
