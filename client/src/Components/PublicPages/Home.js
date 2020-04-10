@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getUserInfo } from "../../Redux/action_creators/actions";
 import '../../styles/style.css'
 import { Link } from 'react-router-dom';
 
@@ -9,6 +10,10 @@ let imgUrl = 'https://res.cloudinary.com/comicom/image/upload/v1586178469/Pages%
 
 
 class Home extends Component {
+    constructor(props) {
+        super(props)
+        this.props.dispatch(getUserInfo());
+    }
 
     render() {
         return (
