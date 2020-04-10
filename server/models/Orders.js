@@ -10,8 +10,11 @@ const ordersSchema = new mongoose.Schema({
         required: true
     },
     product: {
-        productId: {
-            type: Number
+        name: {
+            type: String
+        },
+        price : {
+            type : Number
         },
         quantity: {
             type: Number

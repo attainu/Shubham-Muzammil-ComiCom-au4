@@ -4,11 +4,18 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from 'react-redux';
+import { getUserInfo } from "../Redux/action_creators/actions";
+
 
 toast.configure();
 
 
 class Cart extends Component {
+    constructor(props) {
+        super(props)
+        this.props.dispatch(getUserInfo());
+    }
+
     state = {
         product: {
             name: "product 1",
@@ -21,6 +28,7 @@ class Cart extends Component {
     handleToken = async (token) => {
         const {product, subTotal} = this.state
         const {user} = this.props
+        console.log(user, "user in cart frontend")
         const response = await axios.post('http://localhost:9090/payment/checkout', {token, product, user, subTotal})
         const {status} = response.data
         if(status === "success") {
@@ -78,7 +86,7 @@ class Cart extends Component {
                                 shippingAddress
                                 amount={subtotal * 100}
                                 name={product.name}
-                                currency="inr" />
+                                currency="INR" />
                             </i></a></td>
                         </tr>
                     </tfoot>
@@ -89,7 +97,7 @@ class Cart extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        user : state.user
+        user : state.auth.user
     }
 }
 export default connect(mapStateToProps)(Cart)

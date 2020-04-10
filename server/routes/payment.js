@@ -2,22 +2,22 @@ import {Router} from 'express'
 const router = Router();
 import {Orders, Users} from '../models/index'
 const stripe = require("stripe")("sk_test_CqyxBnAz2fE8UjfMCUQGs5Ga00RXl5TJPi");
-const uuid = require("uuid/v4");
+import { v4 as uuid } from 'uuid';
 
 router.get("/", (req, res) => {
     res.send("Add your Stripe Secret Key to the .require('stripe') statement!");
 });
   
 router.post("/checkout", async (req, res) => {
-    console.log("Request:", req.body);
     let error;
     let status;
     try {
-      const { product, token, user, subTotal } = req.body;
+      const { product, token, subTotal, user } = req.body;
       const customer = await stripe.customers.create({
         email: token.email,
         source: token.id
     });
+    //console.log("user in payment backend", user)
   
     const idempotencyKey = uuid();
     const charge = await stripe.charges.create(
@@ -42,11 +42,13 @@ router.post("/checkout", async (req, res) => {
           idempotencyKey
         }
     );
-    console.log("Charge:", { charge });
+    //console.log("Charge:", { charge });
     status = "success";
-    const newOrder = {userId : user.userId, totalPrice : subTotal, product}
+    //console.log(user, "user from session")
+    console.log(product)
+    const newOrder = {userId : user.user.email, totalPrice : subTotal, product}
         const orderResponse = await Orders.create(newOrder)
-        const userResponse = await Users.findOneAndUpdate({email : user.email}, {orderes : newOrder})
+        const userResponse = await Users.findOneAndUpdate({email : user.user.email}, {orders : newOrder})
         console.log(orderResponse, userResponse)
     } catch (error) {
       console.error("Error:", error);

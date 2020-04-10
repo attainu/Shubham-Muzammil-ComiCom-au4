@@ -7,7 +7,7 @@ export const currentUserInfo = async (req, res) => {
         res.json({
             success: true,
             message: "user has successfully authenticated",
-            user: req.session.user,
+            user: req.user,
             cookies: req.cookies
         });
     } else {
