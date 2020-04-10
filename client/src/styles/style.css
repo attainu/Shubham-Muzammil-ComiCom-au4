@@ -1135,7 +1135,7 @@ section.item-details .product-quantity .plus-btn {
   border-bottom-right-radius: 40px
 }
 
-section.item-details .product-quantity input {
+section.item-details .product-quantity .quantity {
   width: 80px;
   height: 35px;
   font-size: 1em;
