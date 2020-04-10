@@ -3,6 +3,7 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { connect } from 'react-redux';
 
 toast.configure();
 
@@ -14,12 +15,13 @@ class Cart extends Component {
             price: 400,
             quantity: 2
         }, 
-        subtotal : 800
+        subTotal : 800
     }
 
     handleToken = async (token) => {
-        const {product} = this.state
-        const response = await axios.post('http://localhost:9090/payment/checkout', {token, product})
+        const {product, subTotal} = this.state
+        const {user} = this.props
+        const response = await axios.post('http://localhost:9090/payment/checkout', {token, product, user, subTotal})
         const {status} = response.data
         if(status === "success") {
             toast('Success, Check email for details', {type: 'success'})
@@ -85,4 +87,9 @@ class Cart extends Component {
         )
     }
 }
-export default Cart
+const mapStateToProps = (state) => {
+    return {
+        user : state.user
+    }
+}
+export default connect(mapStateToProps)(Cart)

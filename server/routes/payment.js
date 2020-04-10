@@ -1,6 +1,6 @@
 import {Router} from 'express'
 const router = Router();
-import {Orders} from '../models/index'
+import {Orders, Users} from '../models/index'
 const stripe = require("stripe")("sk_test_CqyxBnAz2fE8UjfMCUQGs5Ga00RXl5TJPi");
 const uuid = require("uuid/v4");
 
@@ -10,21 +10,19 @@ router.get("/", (req, res) => {
   
 router.post("/checkout", async (req, res) => {
     console.log("Request:", req.body);
-  
     let error;
     let status;
     try {
-      const { product, token } = req.body;
-  
+      const { product, token, user, subTotal } = req.body;
       const customer = await stripe.customers.create({
         email: token.email,
         source: token.id
     });
   
-    const idempotency_key = uuid();
+    const idempotencyKey = uuid();
     const charge = await stripe.charges.create(
         {
-          amount: product.price * product.quantity,
+          amount: subTotal,
           currency: "inr",
           customer: customer.id,
           receipt_email: token.email,
@@ -41,12 +39,15 @@ router.post("/checkout", async (req, res) => {
           }
         },
         {
-          idempotency_key
+          idempotencyKey
         }
     );
     console.log("Charge:", { charge });
     status = "success";
-
+    const newOrder = {userId : user.userId, totalPrice : subTotal, product}
+        const orderResponse = await Orders.create(newOrder)
+        const userResponse = await Users.findOneAndUpdate({email : user.email}, {orderes : newOrder})
+        console.log(orderResponse, userResponse)
     } catch (error) {
       console.error("Error:", error);
       status = "failure";

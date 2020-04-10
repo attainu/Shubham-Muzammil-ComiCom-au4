@@ -17,16 +17,8 @@ const userSchema = new mongoose.Schema({
     wishList: {
         type: Array
     },
-    orderedItems: {
-        productID: {
-            type: Number
-        },
-        quantity: {
-            type: Number
-        },
-        totalPrice: {
-            type: Number
-        }
+    orders: {
+       type : Object
     },
     cartItems: {
         productID : { 
