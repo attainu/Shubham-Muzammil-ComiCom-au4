@@ -24,8 +24,8 @@ class Pages extends Component {
                     <Header />
                     <Switch>
                         <Route exact path='/' component={Home} />
-                        <Route exact path='/product' component={ProductList} />
-                        <Route exact path='/product/detail' component={ProductDetail} />
+                        <Route exact path='/product/:tag' component={ProductList} />
+                        <Route exact path='/product/detail/:id' component={ProductDetail} />
                         {/* below routes will be add later */}
                         {/* <Route exact path='/profile' component={Profile} />
                         <Route exact path='/wishlists' component={Wislist} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import '../../styles/style.css'
+import { Link } from 'react-router-dom';
 
 let imgUrl3 = 'https://res.cloudinary.com/comicom/image/upload/v1586179566/Pages%20Image/54678_jm38fm.jpg'
 let imgUrl2 = 'https://res.cloudinary.com/comicom/image/upload/v1586178462/Pages%20Image/14358_ntpkal.jpg'
@@ -8,10 +9,6 @@ let imgUrl = 'https://res.cloudinary.com/comicom/image/upload/v1586178469/Pages%
 
 
 class Home extends Component {
-    // constructor(props){
-    //     super(props)
-    //     // this.props.dispatch(getUserInfo());
-    // }
 
     render() {
         return (
@@ -55,31 +52,31 @@ class Home extends Component {
                             </header>
                             <div className="row text-center">
                                 <div className="col-md-4 item">
-                                    <a href="category.html">
+                                    <Link to={'/product/indian'}>
                                         <h4>Indian Comics</h4>
                                         <p>Chacha Chowdary, Pinky, etc</p>
                                         <div className="image">
                                             <img src="https://res.cloudinary.com/comicom/image/upload/v1586180656/Chacha%20Choudary/12e3a6_fe5bfcb0da5643e69c6e55da997ae329_mv2_d_1253_1300_s_2_bicd1v.webp" alt="comic" className="img-fluid" />
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="col-md-4 item">
-                                    <a href="category.html">
+                                    <Link to={'/product/western'}>
                                         <h4>Western Comics</h4>
                                         <p>Ironman, Batman, etc</p>
                                         <div className="image">
                                             <img src="https://res.cloudinary.com/comicom/image/upload/v1585809951/Ironman/clean_ylty3m.jpg" alt="comic" className="img-fluid" />
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="col-md-4 item">
-                                    <a href="category.html">
+                                    <Link to={'/product/manga'}>
                                         <h4>Manga</h4>
                                         <p>One Piece, Oishinbo, etc</p>
                                         <div className="image">
                                             <img src="https://res.cloudinary.com/comicom/image/upload/v1585814838/Manga/again_3_x383bz.jpg" alt="comic" className="img-fluid" />
                                         </div>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +88,7 @@ class Home extends Component {
                             <div className="col-md-6">
                                 <h2>Lorem Ipsum</h2>
                                 <p>lorem ipsum dolor sit amet consectetur adipiscing elit, ed do eiusmod tempor incididunt</p>
-                                <a href="/j" className="btn btn-dark shop-now">Shop Now</a>
+                                <Link to="/product/iron man" className="btn btn-dark shop-now">Shop Now</Link>
                             </div>
                             <div className="col-md-6 d-none d-md-block">
                                 <div className="product">
@@ -112,7 +109,7 @@ class Home extends Component {
                             <div className="col-md-6">
                                 <h2>Lorem Ipsum</h2>
                                 <p>lorem ipsum dolor sit amet consectetur adipiscing elit, ed do eiusmod tempor incididunt</p>
-                                <a href="/j" className="btn btn-dark shop-now">Shop Now</a>
+                                <Link to="/product/deadpool" className="btn btn-dark shop-now">Shop Now</Link>
                             </div>
                         </div>
                     </div>
@@ -123,7 +120,7 @@ class Home extends Component {
                         <h2>Lorem ipsum dolor</h2>
                         <hr/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                        <a href="/j" className="btn btn-dark">Learn More</a>
+                        <Link to="/product/all" className="btn btn-dark">Learn More</Link>
                     </div>
                 </section>
             </div>

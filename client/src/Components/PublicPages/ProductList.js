@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getUserInfo } from "../../Redux/action_creators/actions";
+import { getProducts } from "../../Redux/action_creators/productActions";
 import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
+import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
     constructor(props) {
         super(props)
-        this.props.dispatch(getUserInfo());
+        let tag = this.props.match.params.tag;
+        this.props.dispatch(getProducts(tag));
     }
 
     render() {
@@ -16,8 +18,8 @@ class ProductList extends Component {
             <div className="category-page">
                 <div className="container">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item text-uppercase"> <a href="index.html" className="text-primary">Home</a></li>
-                        <li className="breadcrumb-item active text-uppercase">Cameras</li>
+                        <li className="breadcrumb-item text-uppercase"> <Link to="/" className="text-primary">Home</Link></li>
+                        <li className="breadcrumb-item active text-uppercase">{this.props.match.params.tag}</li>
                     </ol>
                 </div>
                 <section className="products p-t-small">
@@ -25,7 +27,7 @@ class ProductList extends Component {
                         <header>
                             <div className="row d-flex align-items-center">
                                 <div className="col-md-6">
-                                    <h1 className="heading-line">Cameras</h1>
+                                    <h1 className="heading-line text-uppercase">{this.props.match.params.tag}</h1>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="filters d-flex justify-content-end">
@@ -45,23 +47,23 @@ class ProductList extends Component {
                         </header>
                         <div className="my-5">
                             <div className="row">
-                                {this.props.product && this.props.product.map((data, index) => {
+                                {this.props.product.length>0 ? this.props.product.map((data, index) => {
                                     return (
-                                        <div className="col-lg-3 col-md-4 col-sm-6">
+                                        <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
                                             <div className="item text-center">
                                                 <div className="product-image">
                                                     <img src={data.imgURL.main} alt="comic" />
                                                     <div className="overlay">
                                                         <a href='/s' className="wishlist"><FontAwesomeIcon icon={faHeart} style={{ color: "#000" }} /></a>
                                                         <ul className="list-unstyled">
-                                                            <li><a href="detail.html" className="btn btn-unique">View Detail</a></li>
+                                                            <li><Link to={`/product/detail/${data._id}`} className="btn btn-unique">View Detail</Link></li>
                                                             <li><a href='/s' className="btn btn-dark">Add To Cart</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <a href="detail.html" className="item-name">
+                                                <Link to={`/product/detail/${data._id}`} className="item-name">
                                                     <h4>{data.name}</h4>
-                                                </a>
+                                                </Link>
 
                                                 <ul className="price list-inline">
                                                     <li className="list-inline-item"> <span className="price-old">{data.regularPrice}</span></li>
@@ -70,14 +72,16 @@ class ProductList extends Component {
                                             </div>
                                         </div>
                                     )
-                                })}
+                                }) : 
+                                    <h3 className="align-items-center">No Result</h3>
+                                }
                             </div>
                         </div>
                     </div>
                     <div className="pagination pagination-custom mt-5">
                         <nav aria-label="...">
                             <ul className="pagination pagination-sm d-flex justify-content-between">
-                                <li className="page-item disabled"><a href='/s' tabindex="-1" className="page-link">Previous</a></li>
+                                <li className="page-item disabled"><a href='/s' className="page-link">Previous</a></li>
                                 <li>
                                     <ul className="pages list-inline">
                                         <li className="page-item active list-inline-item"><a href='/s' className="page-link">1</a></li>
@@ -96,7 +100,6 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state here in profile", state.product)
     return {
         product: state.product.displayProducts
     }

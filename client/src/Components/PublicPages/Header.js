@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
@@ -28,7 +29,7 @@ class Header extends Component {
 				</div>
 				<nav className="navbar navbar-expand-lg px-lg-0">
 					<div className="container position-relative">
-						<a href="index.html" className="navbar-brand"> <img
+						<a href="/" className="navbar-brand"> <img
 							src="https://res.cloudinary.com/comicom/image/upload/v1586170469/logo_aytppa.png" alt="logo" />
 						</a>
 						<button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

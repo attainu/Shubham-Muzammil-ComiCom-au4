@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getUserInfo } from "../../Redux/action_creators/actions";
+import { Link } from 'react-router-dom';
+import { getProductDetail } from "../../Redux/action_creators/productActions";
 import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faHeart } from "@fortawesome/free-solid-svg-icons"
@@ -9,7 +10,8 @@ import { faArrowLeft, faArrowRight, faHeart } from "@fortawesome/free-solid-svg-
 class ProductDetail extends Component {
     constructor(props) {
         super(props)
-        this.props.dispatch(getUserInfo());
+        let id = this.props.match.params.id;
+        this.props.dispatch(getProductDetail(id));
     }
 
     render() {
@@ -18,9 +20,9 @@ class ProductDetail extends Component {
             <div className="details-page">
                 <div className="container">
                     <ol className="breadcrumb">
-                        <li className="breadcrumb-item text-uppercase"> <a href="index.html" className="text-primary">Home</a></li>
-                        <li className="breadcrumb-item text-uppercase"> <a href="category.html" className="text-primary">Lorem</a></li>
-                        <li className="breadcrumb-item active text-uppercase">Detail</li>
+                        <li className="breadcrumb-item text-uppercase"> <Link to='/' className="text-primary">Home</Link></li>
+                        <li className="breadcrumb-item text-uppercase"> Detail</li>
+                        <li className="breadcrumb-item active text-uppercase">{detail.name}</li>
                     </ol>
                 </div>
                 <section className="item-details p-t-small p-b-small">
@@ -29,11 +31,11 @@ class ProductDetail extends Component {
                             <div className="col-md-6">
                                 <div data-slider-id="1" className="owl-carousel item-slider">
                                     <div className="item">
-                                        <img src={detail.imgURL.main} alt="poster" />
+                                        <img src={detail.imgURL && detail.imgURL.main} alt="poster" />
                                     </div>
-                                    {detail.imgURL.posters.map((data, index)=>{
+                                    {detail.imgURL && detail.imgURL.posters.map((data, index)=>{
                                         return(
-                                            <div className="item">
+                                            <div className="item" key={index}>
                                                 <img src={data} alt="poster" />
                                             </div>
                                         )
@@ -41,11 +43,11 @@ class ProductDetail extends Component {
                                 </div>
                                 <div data-slider-id="1" className="owl-thumbs">
                                     <button className="owl-thumb-item">
-                                        <img src={detail.imgURL.main} alt="thumb" />
+                                        <img src={detail.imgURL && detail.imgURL.main} alt="thumb" />
                                     </button>
-                                    {detail.imgURL.posters.map((data, index)=>{
+                                    {detail.imgURL && detail.imgURL.posters.map((data, index)=>{
                                         return(
-                                            <button className="owl-thumb-item">
+                                            <button className="owl-thumb-item" key={index}>
                                                 <img src={data} alt="thumb" />
                                             </button>
                                         )
@@ -60,12 +62,12 @@ class ProductDetail extends Component {
                                 </div>
                                 <div className="model">
                                     <ul className="list-unstyled">
-                                        <li><span className="text-uppercase">Characters: </span>{detail.characters.join(" , ")}</li>
-                                        <li><span className="text-uppercase">Category: </span>{detail.category.join(" , ")}</li>
+                                        <li><span className="text-uppercase">Characters: </span>{detail.characters && detail.characters.join(" , ")}</li>
+                                        <li><span className="text-uppercase">Category: </span>{detail.category && detail.category.join(" , ")}</li>
                                         <li><span className="text-uppercase">Availability: </span>{detail.itemsInStock>0 ? "In Stock" : "Out of Stock"}</li>
                                     </ul>
                                 </div>
-                                <form action="#" method="get">
+                                <>
                                     <div className="row d-flex justify-content-between">
                                         <div className="col-lg-6">
                                             <ul className="product-quantity list-inline">
@@ -75,7 +77,7 @@ class ProductDetail extends Component {
                                                 <li className="list-inline-item">
                                                     <div className="counter d-flex align-items-center justify-content-start">
                                                         <div className="minus-btn"><FontAwesomeIcon icon={faArrowLeft} style={{color:"#ffd900"}}/></div>
-                                                        <input type="text" value="1" className="quantity" />
+                                                        <span className="quantity">1</span>
                                                         <div className="plus-btn"><FontAwesomeIcon icon={faArrowRight} style={{color:"#ffd900"}}/></div>
                                                     </div>
                                                 </li>
@@ -92,7 +94,7 @@ class ProductDetail extends Component {
                                             <li className="list-inline-item"><a href="/g" className="btn btn-dark">Add to wishlist<FontAwesomeIcon icon={faHeart} style={{color:"#ffd900"}}/></a></li>
                                         </ul>
                                     </div>
-                                </form>
+                                </>
                             </div>
                         </div>
                     </div>
