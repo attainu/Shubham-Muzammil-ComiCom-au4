@@ -8,6 +8,7 @@ import Home from './Home';
 import Footer from './Footer';
 import ProductList from './ProductList';
 import ProductDetail from './ProductDetail';
+import Cart from "../Cart";
 
 // need to create different components to render pages
 
@@ -26,10 +27,10 @@ class Pages extends Component {
                         <Route exact path='/' component={Home} />
                         <Route exact path='/product/:tag' component={ProductList} />
                         <Route exact path='/product/detail/:id' component={ProductDetail} />
+                        <Route exact path='/cart' component={Cart} />
                         {/* below routes will be add later */}
                         {/* <Route exact path='/profile' component={Profile} />
                         <Route exact path='/wishlists' component={Wislist} />
-                        <Route exact path='/cart' component={Cart} />
                         <Route exact path='/cart/checkout' component={Checkout} /> */}
                     </Switch>
                     <Footer />
@@ -40,7 +41,7 @@ class Pages extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state here in profile", state)
+    console.log("state here in pages", state)
     return {
         user: state.auth
     }

@@ -20,7 +20,7 @@ class Header extends Component {
 							<div className="col-sm-8 col-md-9 text-right account-details">
 								<ul className="list-inline">
 									<li className="list-inline-item"> <a href="/a">My Account</a></li>
-									<li className="list-inline-item"><a href="/a">Order History</a></li>
+									<li className="list-inline-item"><Link to="/cart">Order History</Link></li>
 									<li className="list-inline-item"><a href="/a">Login</a></li>
 								</ul>
 							</div>

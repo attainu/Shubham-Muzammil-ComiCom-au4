@@ -4,7 +4,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Signin from './Components/SignIn'
 import Signup from './Components/Signup'
 import Pages from './Components/PublicPages/Pages';
-import Cart from './Components/Cart';
 
 // need to create different components to render pages
 // currently in testing period
@@ -16,7 +15,7 @@ function App() {
       <Route path='/signin' component={Signin} />
       <Route exact path='/' component={Pages} />
       <Route path='/dashboard' component={Dashboard} />
-      <Route path='/cart' component={Cart} />
+      {/* <Route path='/cart' component={Cart} /> */}
     </BrowserRouter>
   );
 }
