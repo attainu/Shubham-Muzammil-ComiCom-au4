@@ -1,15 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import '../../styles/style.css'
+import { getProducts} from "../../Redux/action_creators/productActions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faShoppingCart, faSearch } from "@fortawesome/free-solid-svg-icons"
 
 let Background1 = `https://res.cloudinary.com/comicom/image/upload/c_scale,h_450,w_350/v1586205284/Pages%20Image/webofsm2020001_cov_e5kalf.jpg`
 class Header extends Component {
-
+	state= {
+		query: '',
+		redirect: false
+	}
+	handleChange = (e) => {
+		this.setState({
+			query : e.target.value
+		})
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		const {query} = this.state
+		this.props.getProducts(query)
+		this.setState({redirect : true})
+	}
 	render() {
 		let {wishlist, cartItems} = this.props.feature
+		const {query, redirect} = this.state
+		if(redirect) {
+			return <Redirect to={`/product/${query}`} />
+		}
 		return (
 			<>
 				<div className="top-bar d-none d-sm-block">
@@ -121,8 +140,19 @@ class Header extends Component {
 									</div>
 								</div>
 
-								<div className="nav-item"><a href="contact.html" className="nav-link">Latest Comics</a></div>
-								<div className="nav-item"><a href="contact.html" className="nav-link">Contact Us</a></div>
+								{/* <div className="nav-item"><a href="contact.html" className="nav-link">Latest Comics</a></div>
+								<div className="nav-item"><a href="contact.html" className="nav-link">Contact Us</a></div> */}
+								<div className="nav-item" >
+									<form onSubmit={this.handleSubmit} className="form-inline input-group">
+									<input type="text" onChange={this.handleChange} className="form-control mx-sm-3" />
+									<div className="input-group-append">
+										<button type="submit" formAction='' className="pr-1">
+										<FontAwesomeIcon icon={faSearch} style={{color:"#ffd900"}}/>
+										</button>
+									</div>
+									</form>
+								</div>
+			
 								<div className="nav-item">
 									<ul className="list-inline">
 										<li className="list-inline-item">
@@ -153,5 +183,11 @@ const mapStateToProps = (state) => {
 		feature: state.feature
 	}
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProducts: (tag) => dispatch(getProducts(tag))
+    }
+}
 
-export default connect(mapStateToProps)(Header);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
