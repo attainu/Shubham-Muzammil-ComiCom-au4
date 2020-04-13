@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { getProductDetail } from "../../Redux/action_creators/productActions";
 import '../../styles/style.css'
+import Carousel from 'react-bootstrap/Carousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faArrowRight, faHeart } from "@fortawesome/free-solid-svg-icons"
 
@@ -29,30 +30,18 @@ class ProductDetail extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
-                                <div data-slider-id="1" className="owl-carousel item-slider">
-                                    <div className="item">
-                                        <img src={detail.imgURL && detail.imgURL.main} alt="poster" />
-                                    </div>
-                                    {detail.imgURL && detail.imgURL.posters.map((data, index)=>{
-                                        return(
-                                            <div className="item" key={index}>
-                                                <img src={data} alt="poster" />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                                <div data-slider-id="1" className="owl-thumbs">
-                                    <button className="owl-thumb-item">
-                                        <img src={detail.imgURL && detail.imgURL.main} alt="thumb" />
-                                    </button>
-                                    {detail.imgURL && detail.imgURL.posters.map((data, index)=>{
-                                        return(
-                                            <button className="owl-thumb-item" key={index}>
-                                                <img src={data} alt="thumb" />
-                                            </button>
-                                        )
-                                    })}
-                                </div>
+                                <Carousel>
+                                    <Carousel.Item>
+                                        <img className="d-block mx-auto" src={detail.imgURL.main} alt="poster" />
+                                    </Carousel.Item>
+                                    <Carousel.Item>
+                                        {detail.imgURL && detail.imgURL.posters.map((data, index) => {
+                                            return (
+                                                <img src={data} className="d-block mx-auto" alt="poster" />
+                                            )
+                                        })}
+                                    </Carousel.Item>
+                                </Carousel>
                             </div>
                             <div className="col-md-6">
                                 <h1 className="h2">{detail.name}</h1>
@@ -64,7 +53,7 @@ class ProductDetail extends Component {
                                     <ul className="list-unstyled">
                                         <li><span className="text-uppercase">Characters: </span>{detail.characters && detail.characters.join(" , ")}</li>
                                         <li><span className="text-uppercase">Category: </span>{detail.category && detail.category.join(" , ")}</li>
-                                        <li><span className="text-uppercase">Availability: </span>{detail.itemsInStock>0 ? "In Stock" : "Out of Stock"}</li>
+                                        <li><span className="text-uppercase">Availability: </span>{detail.itemsInStock > 0 ? "In Stock" : "Out of Stock"}</li>
                                     </ul>
                                 </div>
                                 <>
@@ -76,9 +65,9 @@ class ProductDetail extends Component {
                                                 </li>
                                                 <li className="list-inline-item">
                                                     <div className="counter d-flex align-items-center justify-content-start">
-                                                        <div className="minus-btn"><FontAwesomeIcon icon={faArrowLeft} style={{color:"#ffd900"}}/></div>
+                                                        <div className="minus-btn"><FontAwesomeIcon icon={faArrowLeft} style={{ color: "#ffd900" }} /></div>
                                                         <span className="quantity">1</span>
-                                                        <div className="plus-btn"><FontAwesomeIcon icon={faArrowRight} style={{color:"#ffd900"}}/></div>
+                                                        <div className="plus-btn"><FontAwesomeIcon icon={faArrowRight} style={{ color: "#ffd900" }} /></div>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -91,7 +80,7 @@ class ProductDetail extends Component {
                                             <li className="list-inline-item">
                                                 <button href="#" className="btn btn-unique">Add To Cart</button>
                                             </li>
-                                            <li className="list-inline-item"><a href="/g" className="btn btn-dark">Add to wishlist<FontAwesomeIcon icon={faHeart} style={{color:"#ffd900"}}/></a></li>
+                                            <li className="list-inline-item"><a href="/g" className="btn btn-dark">Add to wishlist<FontAwesomeIcon icon={faHeart} style={{ color: "#ffd900" }} /></a></li>
                                         </ul>
                                     </div>
                                 </>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { signUser } from '../Redux/action_creators/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faGooglePlusG } from "@fortawesome/free-brands-svg-icons"
@@ -21,11 +21,14 @@ class Signin extends Component {
         })
     }
 
-    submitSignin=()=>{
+    submitSignin=(e)=>{
         this.props.dispatch(signUser(this.state))
     }
 
     render() {
+        if (this.props.auth.isAuthenticated) {
+            return <Redirect to="/" />;
+        }
         return (
             <div className="limiter">
                 <div className="container-login100" style={{backgroundImage:`url(${comic})`}}>
@@ -66,7 +69,7 @@ class Signin extends Component {
 
 const mapStateToProps = (state)=>{
     return {
-        user : state.auth
+        auth : state.auth
     }
 }
 

@@ -6,16 +6,13 @@ const DEFAULT_STATE = {
 export const authReducer = (state = DEFAULT_STATE, action) => {
     let stateCopy = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-        case 'GET_USER':
-            if(action.payload){
-                stateCopy.isAuthenticated = true;
-                stateCopy.user = action.payload;
-            }
+        
+        case 'SET_CURRENT_USER':
+            stateCopy.isAuthenticated = !!Object.keys(action.payload).length
+            stateCopy.user = action.payload;
             state = stateCopy;
             return state;
-        case 'SET_USER':
-            console.log(action.payload)
-            return state;
+
         default:
             return state;
     }

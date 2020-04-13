@@ -805,6 +805,7 @@ nav.navbar .megamenu ul a:hover {
 
 @media (max-width: 580px) {
   nav.navbar button.navbar-toggler {
+    color: #ffd900;
     right: 1rem
   }
   nav.navbar .navbar-nav .dropdown-menu {
@@ -1359,4 +1360,21 @@ a.text-primary:hover, a.text-primary:focus {
 .pagination-sm .page-item:last-child .page-link {
   border-top-right-radius: .2rem;
   border-bottom-right-radius: .2rem
+}
+
+.carousel img{
+  height: 600px;
+  margin: auto;
+}
+
+@media (max-width: 900px) {
+  .carousel img{
+    width:auto;
+    height:auto;
+  }
+}
+
+section .item-details .carousel-item{
+  align-items: center;
+  justify-content: center;
 }

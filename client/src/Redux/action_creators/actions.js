@@ -1,20 +1,26 @@
-import { fetchUserAction, signinUser} from '../../Api/users'
+import { fetchUserAction, signinUser, signupUser, setToken, signoutUser } from '../../Api/users'
 
 //for sending list to store on first load
-export const sendUserInfo = (userData) => {
+
+export const setUserInfo = (userData) => {
   return {
-    type: "GET_USER",
+    type: "SET_CURRENT_USER",
     payload: userData,
   }
 }
+
+//use DRY method
 
 // for getting list from api calls
 export const getUserInfo = () => {
   return async dispatch => {
     try {
       let userResult = await fetchUserAction()
-      console.log("userresult", userResult)
-      dispatch(sendUserInfo(userResult.data));
+      if(userResult.data.user){
+        localStorage.setItem('jwtToken', userResult.data.token);
+        setToken(userResult.data.token);
+        dispatch(setUserInfo(userResult.data.user));
+      }
     } catch (error) {
       console.log("error in getUserInfo", error)
     }
@@ -23,14 +29,41 @@ export const getUserInfo = () => {
 
 //for loggedin
 export const signUser = (formInfo) => {
-  console.log(formInfo)
   return async dispatch => {
     try {
-      console.log("dsadasd")
       let info = await signinUser(formInfo)
-      dispatch({type:"SET_USER", payload:info})
+      localStorage.setItem('jwtToken', info.data.token);
+      setToken(info.data.token);
+      dispatch(setUserInfo(info.data.user));
     } catch (error) {
       console.log("error in signinUser", error)
+    }
+  }
+}
+
+//for register
+export const registerUser = (formInfo) => {
+  return async dispatch => {
+    try {
+      let info = await signupUser(formInfo)
+      localStorage.setItem('jwtToken',info.data.token);
+      setToken(info.data.token);
+      dispatch(setUserInfo(info.data.user));
+    } catch (error) {
+      console.log("error in registerUser", error)
+    }
+  }
+}
+
+export const logoutUser = () => {
+  return async dispatch => {
+    try {
+      await signoutUser()
+      localStorage.removeItem('jwtToken');
+      setToken(null);
+      dispatch(setUserInfo({}));
+    } catch (error) {
+      console.log("error in logoutUser", error)
     }
   }
 }

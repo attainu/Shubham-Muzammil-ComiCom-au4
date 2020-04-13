@@ -1,14 +1,16 @@
 import bcrypt from 'bcryptjs'
 import Users from '../models/Users'
+import jwt from 'jsonwebtoken';
 
 export const currentUserInfo = async (req, res) => {
     if (req.user) {
+        const token = jwt.sign( {user: req.user} , "somerandomkey");
         req.password = undefined
         res.json({
             success: true,
             message: "user has successfully authenticated",
             user: req.user,
-            cookies: req.cookies
+            token: token
         });
     } else {
         res.json({
@@ -21,7 +23,7 @@ export const currentUserInfo = async (req, res) => {
 export const currentUserLogout = async (req, res) => {
     req.session = null
     req.logout();
-    res.redirect('/')
+    return res.redirect('http://localhost:3000/')
 }
 
 export const registerUser = async (req, res) => {
@@ -29,13 +31,13 @@ export const registerUser = async (req, res) => {
         const { body } = req;
         const username = body.username;
         const email = body.email;
-        if (body.password !== body.confirmPass) {
-            res.json({
+        if (body.pass !== body.confirmPass) {
+            return res.json({
                 success: false,
                 message: "Enter Correct Password"
             });
         }
-        bcrypt.hash(body.password, 10, async (error, bcrypt_hashedPassword) => {
+        bcrypt.hash(body.pass, 10, async (error, bcrypt_hashedPassword) => {
             await Users.create({
                 userName: username,
                 email: email,
@@ -47,10 +49,12 @@ export const registerUser = async (req, res) => {
                         message: "User Already Exists"
                     })
                 }
+                const token = jwt.sign({ user: response }, "somerandomkey")
                 return res.json({
                     success: true,
                     message: "user has successfully registered",
-                    user: response
+                    user: response,
+                    token: token
                 })
             })
         })
@@ -88,11 +92,14 @@ export const loginUser = async (req, res) => {
                 }
                 let userInfo = user;
                 userInfo.password = undefined;
+                const token = jwt.sign({ user: userInfo }, "somerandomkey");
                 req.session.user = userInfo;
                 res.cookies = userInfo
                 return res.json({
                     success: true,
-                    message: userInfo
+                    message: "user has successfully logged-in",
+                    user: userInfo,
+                    token: token
                 })
             });
         })
@@ -103,3 +110,20 @@ export const loginUser = async (req, res) => {
         })
     }
 }
+
+// router.get("/tokenverify", (req, res) => {
+//     const bearer = req.headers["authorization"];
+//     if (bearer) {
+//         const bearerToken = bearer.split(" ");
+//         const token = bearerToken[1];
+//         jwt.verify(token, somerandomkey, (err, data) => {
+//             if (err) {
+//                 res.sendStatus(403);
+//             } else {
+//                 res.json(data);
+//             }
+//         });
+//     } else {
+//         res.sendStatus(403);
+//     }
+// });

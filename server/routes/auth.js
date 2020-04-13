@@ -8,7 +8,7 @@ router.get('/google',passport.authenticate('google', {
 }));
 
 // Successful authentication, redirect profile.
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:3000/signin' }),
   (req, res) => {
   res.redirect('http://localhost:3000/');
 });
@@ -17,9 +17,10 @@ router.get('/facebook',
   passport.authenticate('facebook')
 );
 
-router.get("/facebook/callback",passport.authenticate('facebook',{
-  successRedirect:'http://localhost:3000/'
-}));
+router.get("/facebook/callback",passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/signin' }),
+(req, res) => {
+  res.redirect('http://localhost:3000/');
+});
 
 router.post('/register', controllers.registerUser);
 router.post('/login', controllers.loginUser);

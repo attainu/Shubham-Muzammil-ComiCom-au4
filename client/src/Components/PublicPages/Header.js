@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import '../../styles/style.css'
+import { logoutUser } from '../../Redux/action_creators/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 
@@ -21,7 +22,11 @@ class Header extends Component {
 								<ul className="list-inline">
 									<li className="list-inline-item"> <a href="/a">My Account</a></li>
 									<li className="list-inline-item"><a href="/a">Order History</a></li>
-									<li className="list-inline-item"><a href="/a">Login</a></li>
+									{this.props.user.isAuthenticated ? 
+									<li className="list-inline-item"><Link to="/signin">Login</Link></li>
+									:
+									<li className="list-inline-item"><Link to='/' onClick={()=>{this.props.dispatch(logoutUser())}}>Logout</Link></li>
+									}
 								</ul>
 							</div>
 						</div>
@@ -45,9 +50,9 @@ class Header extends Component {
 									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 									className="nav-link">Category<i className="fa fa-caret-down"></i></a>
 									<div aria-labelledby="navbarCategory" className="dropdown-menu">
-										<a href="category.html" className="dropdown-item">Indian</a>
+										<Link to="/product/indian" className="dropdown-item">Indian</Link>
 										<a href="category-left.html" className="dropdown-item">Western</a>
-										<a href="category-right.html" className="dropdown-item">Manga</a>
+										<Link to="/product/manga" className="dropdown-item">Manga</Link>
 									</div>
 								</div>
 								<div className="nav-item">
@@ -150,7 +155,8 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		feature: state.feature
+		feature: state.feature,
+		user: state.auth
 	}
 }
 

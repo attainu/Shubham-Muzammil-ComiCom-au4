@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getUserInfo } from "../../Redux/action_creators/actions";
 import '../../styles/style.css'
 import { Link } from 'react-router-dom';
+import Carousel from 'react-bootstrap/Carousel'
 
 let imgUrl3 = 'https://res.cloudinary.com/comicom/image/upload/v1586179566/Pages%20Image/54678_jm38fm.jpg'
 let imgUrl2 = 'https://res.cloudinary.com/comicom/image/upload/v1586178462/Pages%20Image/14358_ntpkal.jpg'
@@ -12,42 +13,60 @@ let imgUrl = 'https://res.cloudinary.com/comicom/image/upload/v1586178469/Pages%
 class Home extends Component {
     constructor(props) {
         super(props)
-        this.props.dispatch(getUserInfo());
+        console.log("4")
+        if(!this.props.user.isAuthenticated){
+            this.props.dispatch(getUserInfo());
+        }
     }
 
     render() {
         return (
             <div className="home-page">
                 <section className="hero hero-2">
-                    <div data-slider-id="1" className="owl-carousel hero-2-slider">
-                        <div style={{ backgroundImage: `url(${imgUrl})` }} className="item d-flex align-items-center align-items-center">
+                    <Carousel>
+                        <Carousel.Item>
+                            <img className="d-block w-100" src={imgUrl} alt="First slide"
+                            />
+                            <Carousel.Caption>
                             <div className="container">
                                 <div className="content text-center">
                                     <h5 className="text-uppercase">Lorem ipsum dolor</h5>
                                     <h1 className="text-uppercase text-primary">Batman House</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p><a href="category.html" className="arrow text-uppercase">shop now</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                                    <Link to='/product/batman' className="arrow text-uppercase">shop now</Link>
                                 </div>
                             </div>
-                        </div>
-                        <div style={{ backgroundImage: `url(${imgUrl2})` }} className="item d-flex align-items-center align-items-center">
-                            <div className="container d-flex align-items-center">
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img className="d-block w-100" src={imgUrl2} alt="Second slide"
+                            />
+                            <Carousel.Caption>
+                            <div className="container">
                                 <div className="content text-center">
                                     <h5 className="text-uppercase">Lorem ipsum dolor</h5>
                                     <h1 className="text-uppercase text-primary">Marvel House</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p><a href="category.html" className="arrow text-uppercase">shop now</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                                    <Link to='/product/marvel' className="arrow text-uppercase">shop now</Link>
                                 </div>
                             </div>
-                        </div>
-                        <div style={{ backgroundImage: `url(${imgUrl3})` }} className="item d-flex align-items-center align-items-center">
-                            <div className="container d-flex align-items-center">
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                            <img className="d-block w-100" src={imgUrl3} alt="Third slide"
+                            />
+                            <Carousel.Caption>
+                            <div className="container">
                                 <div className="content text-center">
                                     <h5 className="text-uppercase">Lorem ipsum dolor</h5>
                                     <h1 className="text-uppercase text-primary">Venom House</h1>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p><a href="category.html" className="arrow text-uppercase">shop now</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                                    <Link to='/product/marvel' className="arrow text-uppercase">shop now</Link>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                            </Carousel.Caption>
+                        </Carousel.Item>
+                    </Carousel>
                 </section>
                 <section className="categories">
                     <div className="container">
@@ -123,7 +142,7 @@ class Home extends Component {
                     <div className="container text-center">
                         <p className="h5">New Arrival Collections</p>
                         <h2>Lorem ipsum dolor</h2>
-                        <hr/>
+                        <hr />
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
                         <Link to="/product/all" className="btn btn-dark">Learn More</Link>
                     </div>
