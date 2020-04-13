@@ -33,7 +33,7 @@ class ProductList extends Component {
                                     <h1 className="heading-line text-uppercase">{this.props.match.params.tag}</h1>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="filters d-flex justify-content-end">
+                                    {/* <div className="filters d-flex justify-content-end">
                                         <select title="Brand" name="brand" className="filter-branselect form-control">
                                             <option value="">Brand: Nikon</option>
                                             <option value="">Brand: Canon</option>
@@ -44,7 +44,7 @@ class ProductList extends Component {
                                             <option value="">Alphabetically A-Z</option>
                                             <option value="">Alphabetically Z-A</option>
                                         </select>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </header>
@@ -60,7 +60,7 @@ class ProductList extends Component {
                                                         <a href='/s' className="wishlist"><FontAwesomeIcon icon={faHeart} style={{ color: "#000" }} /></a>
                                                         <ul className="list-unstyled">
                                                             <li><Link to={`/product/detail/${data._id}`} className="btn btn-unique">View Detail</Link></li>
-                                                            <li><a onClick={() => this.addToCart(index)} className="btn btn-dark">Add To Cart</a></li>
+                                                            <li><div onClick={() => this.addToCart(index)} className="btn btn-dark">Add To Cart</div></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -81,7 +81,7 @@ class ProductList extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="pagination pagination-custom mt-5">
+                    {/* <div className="pagination pagination-custom mt-5">
                         <nav aria-label="...">
                             <ul className="pagination pagination-sm d-flex justify-content-between">
                                 <li className="page-item disabled"><a href='/s' className="page-link">Previous</a></li>
@@ -95,7 +95,7 @@ class ProductList extends Component {
                                 <li className="page-item"><a href='/s' className="page-link">Next</a></li>
                             </ul>
                         </nav>
-                    </div>
+                    </div> */}
                 </section>
             </div>
         )

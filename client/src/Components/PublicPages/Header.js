@@ -20,8 +20,10 @@ class Header extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault()
 		const {query} = this.state
-		this.props.getProducts(query)
-		this.setState({redirect : true})
+		if(query && query !== ' '){
+			this.props.getProducts(query)
+			this.setState({redirect : true})
+		}
 	}
 	render() {
 		let {wishlist, cartItems} = this.props.feature
@@ -40,7 +42,7 @@ class Header extends Component {
 								<ul className="list-inline">
 									<li className="list-inline-item"> <a href="/a">My Account</a></li>
 									<li className="list-inline-item"><Link to="/cart">Order History</Link></li>
-									<li className="list-inline-item"><a href="/a">Login</a></li>
+									<li className="list-inline-item"><Link to="/signin">Login</Link></li>
 								</ul>
 							</div>
 						</div>
@@ -48,25 +50,25 @@ class Header extends Component {
 				</div>
 				<nav className="navbar navbar-expand-lg px-lg-0">
 					<div className="container position-relative">
-						<a href="/" className="navbar-brand"> <img
+						<Link to="/" className="navbar-brand"> <img
 							src="https://res.cloudinary.com/comicom/image/upload/v1586170469/logo_aytppa.png" alt="logo" />
-						</a>
+						</Link>
 						<button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 							aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 							className="navbar-toggler navbar-toggler-right">Menu <i className="fa fa-bars"></i></button>
 						<div id="navbarSupportedContent" className="collapse navbar-collapse">
 							<div className="navbar-nav ml-auto align-items-lg-center">
 								<div className="nav-item">
-									<a href="contact.html" className="nav-link">Home</a>
+									<Link to="/" className="nav-link">Home</Link>
 								</div>
 								<div className="nav-item dropdown">
 									<a id="navbarCategory" data-target="#" href="index.html"
 									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 									className="nav-link">Category<i className="fa fa-caret-down"></i></a>
 									<div aria-labelledby="navbarCategory" className="dropdown-menu">
-										<a href="category.html" className="dropdown-item">Indian</a>
-										<a href="category-left.html" className="dropdown-item">Western</a>
-										<a href="category-right.html" className="dropdown-item">Manga</a>
+										<Link to="/product/indian" className="dropdown-item">Indian</Link>
+										<Link to="/product/western" className="dropdown-item">Western</Link>
+										<Link to="/product/manga" className="dropdown-item">Manga</Link>
 									</div>
 								</div>
 								<div className="nav-item">
@@ -81,56 +83,56 @@ class Header extends Component {
 													<div className="col-lg-6">
 														<h6 className="heading-line">Marvel</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="index.html"
-																className="megamenu-list-link">Ironman </a>
+															<li className="megamenu-list-item"><Link to="/product/iron man"
+																className="megamenu-list-link">Ironman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="index2.html"
-																className="megamenu-list-link">Captain America </a>
+															<li className="megamenu-list-item"><Link to="/product/captain america"
+																className="megamenu-list-link">Captain America </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="index.html"
-																className="megamenu-list-link">Spiderman </a>
+															<li className="megamenu-list-item"><Link to="/product/spiderman"
+																className="megamenu-list-link">Spiderman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="index2.html"
-																className="megamenu-list-link">Hulk </a>
+															<li className="megamenu-list-item"><Link to="/product/hulk"
+																className="megamenu-list-link">Hulk </Link>
 															</li>
 														</ul>
 														<h6 className="heading-line">DC</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="category.html"
-																className="megamenu-list-link">Batman </a>
+															<li className="megamenu-list-item"><Link to="/product/batman"
+																className="megamenu-list-link">Batman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="category-right.html"
-																className="megamenu-list-link">Superman </a>
+															<li className="megamenu-list-item"><Link to="/product/superman"
+																className="megamenu-list-link">Superman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="category-left.html"
-																className="megamenu-list-link">Aquaman </a>
+															<li className="megamenu-list-item"><Link to="/product/aquaman"
+																className="megamenu-list-link">Aquaman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="detail.html"
+															{/* <li className="megamenu-list-item"><a href="detail.html"
 																className="megamenu-list-link">Product detail </a>
-															</li>
+															</li> */}
 														</ul>
 													</div>
 													<div className="col-lg-6">
 
 														<h6 className="heading-line">Diamond</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="cart.html"
-																className="megamenu-list-link">Chacha Choudary </a>
+															<li className="megamenu-list-item"><Link to="/product/chacha choudhary"
+																className="megamenu-list-link">Chacha Choudary </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="cart.html"
-																className="megamenu-list-link">Pinky </a>
+															<li className="megamenu-list-item"><Link to="/product/pinky"
+																className="megamenu-list-link">Pinky </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="cart.html"
-																className="megamenu-list-link">Billu </a>
+															<li className="megamenu-list-item"><Link to="/product/billu"
+																className="megamenu-list-link">Billu </Link>
 															</li>
 														</ul>
 														<h6 className="heading-line">Pages</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="text.html"
-																className="megamenu-list-link">About Us </a>
+															<li className="megamenu-list-item"><Link to="/about"
+																className="megamenu-list-link">About Us </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="contact.html"
-																className="megamenu-list-link">Contact </a>
+															<li className="megamenu-list-item"><Link to="/contact"
+																className="megamenu-list-link">Contact </Link>
 															</li>
 														</ul>
 													</div>
@@ -144,7 +146,7 @@ class Header extends Component {
 								<div className="nav-item"><a href="contact.html" className="nav-link">Contact Us</a></div> */}
 								<div className="nav-item" >
 									<form onSubmit={this.handleSubmit} className="form-inline input-group">
-									<input type="text" onChange={this.handleChange} className="form-control mx-sm-3" />
+									<input type="text" onChange={this.handleChange} className="form-control mx-sm-3" placeholder="Search" />
 									<div className="input-group-append">
 										<button type="submit" formAction='' className="pr-1">
 										<FontAwesomeIcon icon={faSearch} style={{color:"#ffd900"}}/>
@@ -162,10 +164,10 @@ class Header extends Component {
 											</a>
 										</li>
 										<li className="list-inline-item">
-											<a href="cart.html" className="nav-link">
+											<Link to='/cart' className="nav-link">
 												<div className="icon cart"><FontAwesomeIcon icon={faShoppingCart} style={{color:"#000000"}}/><sup style={{color:"#000000"}}>{cartItems.length}</sup>
 												</div>
-											</a>
+											</Link>
 										</li>
 									</ul>
 								</div>

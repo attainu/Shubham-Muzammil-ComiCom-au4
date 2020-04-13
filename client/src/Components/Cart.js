@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from 'react-redux';
 import { getUserInfo } from "../Redux/action_creators/actions";
+import { Link } from 'react-router-dom';
 
 
 toast.configure();
@@ -49,8 +50,7 @@ class Cart extends Component {
 
     handleQuantity = (id, e) => {
         const {products} = this.state
-        console.log("input number value", e.target.value)
-        if(e.target.value == 0 ){
+        if(e.target.value === '0' ){
             this.deleteItem(id)
         }else {
             products[id].quantity = e.target.value
@@ -120,19 +120,19 @@ class Cart extends Component {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><a href="#" className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</a></td>
+                            <td><Link to="/product/all" className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</Link></td>
                             <td colSpan="2" className="hidden-xs"></td>
                             <td className="hidden-xs text-center"><strong>Total {this.calculateTotal()}</strong></td>
-                            <td><a href="#" className="btn btn-success btn-block">Checkout <i className="fa fa-angle-right">
+                            <td><div className="btn btn-success btn-block">Checkout <i className="fa fa-angle-right">
                                 <StripeCheckout
                                 stripeKey="pk_test_e0CmhcAm3715JsIVZSwCK0Cl00u6U8GNww"
                                 token={this.handleToken}
                                 billingAddress
                                 shippingAddress
                                 amount={subTotal * 100}
-                                name={products[0].name}
+                                name={"Comicom order"}
                                 currency="INR" />
-                            </i></a></td>
+                            </i></div></td>
                         </tr>
                     </tfoot>
                 </table>
