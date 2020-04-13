@@ -42,3 +42,13 @@ export const getProductDetail = (id) => {
         }
     }
 }
+
+export const addComicToCart = (product) => {
+    return async(dispatch) => {
+        try {
+            dispatch({type : "ADD_TO_CART", payload: product})
+        } catch (error) {
+            console.error("Error in productAction addComicToCart",error)
+        }
+    }
+}

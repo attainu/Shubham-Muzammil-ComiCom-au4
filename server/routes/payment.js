@@ -26,7 +26,7 @@ router.post("/checkout", async (req, res) => {
           currency: "inr",
           customer: customer.id,
           receipt_email: token.email,
-          description: `Purchased the ${product.name}`,
+          description: `Purchased the Comic books from comicom`,
           shipping: {
             name: token.card.name,
             address: {

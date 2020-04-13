@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTruck, faDollarSign, faPhoneAlt } from "@fortawesome/free-solid-svg-icons"
@@ -14,21 +15,21 @@ class Footer extends Component {
                             <div className="col-lg-3 col-sm-6">
                                 <h3>Site Map</h3>
                                 <ul className="list-unstyled">
-                                    <li> <a href="/footer">Home</a></li>
-                                    <li> <a href="/footer">About Us</a></li>
-                                    <li> <a href="/footer">Latest</a></li>
-                                    <li> <a href="/footer">See all</a></li>
-                                    <li> <a href="/footer">Contact Us</a></li>
+                                    <li> <Link to="/">Home</Link></li>
+                                    <li> <Link to="/about">About Us</Link></li>
+                                    <li> <Link to="/">Latest</Link></li>
+                                    <li> <Link to="/product/all">See all</Link></li>
+                                    <li> <Link to="/contact">Contact Us</Link></li>
                                 </ul>
                             </div>
                             <div className="col-lg-3 col-sm-6">
                                 <h3>Charaters</h3>
                                 <ul className="list-unstyled">
-                                    <li> <a href="/footer">Iron Man</a></li>
-                                    <li> <a href="/footer">Batman</a></li>
-                                    <li> <a href="/footer">Chacha Choudary</a></li>
-                                    <li> <a href="/footer">Superman</a></li>
-                                    <li> <a href="/footer">Hulk</a></li>
+                                    <li> <Link to="/product/iron man">Iron Man</Link></li>
+                                    <li> <Link to="/product/batman">Batman</Link></li>
+                                    <li> <Link to="/product/chacha choudhary">Chacha Choudhary</Link></li>
+                                    <li> <Link to="/product/superman">Superman</Link></li>
+                                    <li> <Link to="/product/hulk">Hulk</Link></li>
                                 </ul>
                             </div>
                             <div className="col-lg-2 col-sm-6">

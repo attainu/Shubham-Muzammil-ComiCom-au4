@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { getProductDetail } from "../../Redux/action_creators/productActions";
+import { getProductDetail, addComicToCart } from "../../Redux/action_creators/productActions";
 import '../../styles/style.css'
 import Carousel from 'react-bootstrap/Carousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,7 +12,11 @@ class ProductDetail extends Component {
     constructor(props) {
         super(props)
         let id = this.props.match.params.id;
-        this.props.dispatch(getProductDetail(id));
+        this.props.getProductDetail(id);
+    }
+
+    addToCart = () => {
+        this.props.addToCart(this.props.detail)
     }
 
     render() {
@@ -78,7 +82,7 @@ class ProductDetail extends Component {
                                     <div className="CTAs">
                                         <ul className="list-inline">
                                             <li className="list-inline-item">
-                                                <button href="#" className="btn btn-unique">Add To Cart</button>
+                                                <button onClick={this.addToCart} className="btn btn-unique">Add To Cart</button>
                                             </li>
                                             <li className="list-inline-item"><a href="/g" className="btn btn-dark">Add to wishlist<FontAwesomeIcon icon={faHeart} style={{ color: "#ffd900" }} /></a></li>
                                         </ul>
@@ -100,4 +104,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ProductDetail);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProductDetail: (id) => dispatch(getProductDetail(id)),
+        addToCart : (product) => dispatch(addComicToCart(product))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

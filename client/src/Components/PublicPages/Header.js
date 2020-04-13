@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import '../../styles/style.css'
 import { logoutUser } from '../../Redux/action_creators/actions';
+import { getProducts} from "../../Redux/action_creators/productActions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faShoppingCart, faSearch } from "@fortawesome/free-solid-svg-icons"
 
 let Background1 = `https://res.cloudinary.com/comicom/image/upload/c_scale,h_450,w_350/v1586205284/Pages%20Image/webofsm2020001_cov_e5kalf.jpg`
 class Header extends Component {
-
+	state= {
+		query: '',
+		redirect: false
+	}
+	handleChange = (e) => {
+		this.setState({
+			query : e.target.value
+		})
+	}
+	handleSubmit = (e) => {
+		e.preventDefault()
+		const {query} = this.state
+		if(query && query !== ' '){
+			this.props.getProducts(query)
+			this.setState({redirect : true})
+		}
+	}
 	render() {
 		let {wishlist, cartItems} = this.props.feature
+		const {query, redirect} = this.state
+		if(redirect) {
+			return <Redirect to={`/product/${query}`} />
+		}
 		return (
 			<>
 				<div className="top-bar d-none d-sm-block">
@@ -21,12 +42,8 @@ class Header extends Component {
 							<div className="col-sm-8 col-md-9 text-right account-details">
 								<ul className="list-inline">
 									<li className="list-inline-item"> <a href="/a">My Account</a></li>
-									<li className="list-inline-item"><a href="/a">Order History</a></li>
-									{this.props.user.isAuthenticated ? 
+									<li className="list-inline-item"><Link to="/cart">Order History</Link></li>
 									<li className="list-inline-item"><Link to="/signin">Login</Link></li>
-									:
-									<li className="list-inline-item"><Link to='/' onClick={()=>{this.props.dispatch(logoutUser())}}>Logout</Link></li>
-									}
 								</ul>
 							</div>
 						</div>
@@ -34,16 +51,16 @@ class Header extends Component {
 				</div>
 				<nav className="navbar navbar-expand-lg px-lg-0">
 					<div className="container position-relative">
-						<a href="/" className="navbar-brand"> <img
+						<Link to="/" className="navbar-brand"> <img
 							src="https://res.cloudinary.com/comicom/image/upload/v1586170469/logo_aytppa.png" alt="logo" />
-						</a>
+						</Link>
 						<button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 							aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
 							className="navbar-toggler navbar-toggler-right">Menu <i className="fa fa-bars"></i></button>
 						<div id="navbarSupportedContent" className="collapse navbar-collapse">
 							<div className="navbar-nav ml-auto align-items-lg-center">
 								<div className="nav-item">
-									<a href="contact.html" className="nav-link">Home</a>
+									<Link to="/" className="nav-link">Home</Link>
 								</div>
 								<div className="nav-item dropdown">
 									<a id="navbarCategory" data-target="#" href="index.html"
@@ -51,7 +68,7 @@ class Header extends Component {
 									className="nav-link">Category<i className="fa fa-caret-down"></i></a>
 									<div aria-labelledby="navbarCategory" className="dropdown-menu">
 										<Link to="/product/indian" className="dropdown-item">Indian</Link>
-										<a href="category-left.html" className="dropdown-item">Western</a>
+										<Link to="/product/western" className="dropdown-item">Western</Link>
 										<Link to="/product/manga" className="dropdown-item">Manga</Link>
 									</div>
 								</div>
@@ -67,56 +84,56 @@ class Header extends Component {
 													<div className="col-lg-6">
 														<h6 className="heading-line">Marvel</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="index.html"
-																className="megamenu-list-link">Ironman </a>
+															<li className="megamenu-list-item"><Link to="/product/iron man"
+																className="megamenu-list-link">Ironman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="index2.html"
-																className="megamenu-list-link">Captain America </a>
+															<li className="megamenu-list-item"><Link to="/product/captain america"
+																className="megamenu-list-link">Captain America </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="index.html"
-																className="megamenu-list-link">Spiderman </a>
+															<li className="megamenu-list-item"><Link to="/product/spiderman"
+																className="megamenu-list-link">Spiderman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="index2.html"
-																className="megamenu-list-link">Hulk </a>
+															<li className="megamenu-list-item"><Link to="/product/hulk"
+																className="megamenu-list-link">Hulk </Link>
 															</li>
 														</ul>
 														<h6 className="heading-line">DC</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="category.html"
-																className="megamenu-list-link">Batman </a>
+															<li className="megamenu-list-item"><Link to="/product/batman"
+																className="megamenu-list-link">Batman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="category-right.html"
-																className="megamenu-list-link">Superman </a>
+															<li className="megamenu-list-item"><Link to="/product/superman"
+																className="megamenu-list-link">Superman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="category-left.html"
-																className="megamenu-list-link">Aquaman </a>
+															<li className="megamenu-list-item"><Link to="/product/aquaman"
+																className="megamenu-list-link">Aquaman </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="detail.html"
+															{/* <li className="megamenu-list-item"><a href="detail.html"
 																className="megamenu-list-link">Product detail </a>
-															</li>
+															</li> */}
 														</ul>
 													</div>
 													<div className="col-lg-6">
 
 														<h6 className="heading-line">Diamond</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="cart.html"
-																className="megamenu-list-link">Chacha Choudary </a>
+															<li className="megamenu-list-item"><Link to="/product/chacha choudhary"
+																className="megamenu-list-link">Chacha Choudary </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="cart.html"
-																className="megamenu-list-link">Pinky </a>
+															<li className="megamenu-list-item"><Link to="/product/pinky"
+																className="megamenu-list-link">Pinky </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="cart.html"
-																className="megamenu-list-link">Billu </a>
+															<li className="megamenu-list-item"><Link to="/product/billu"
+																className="megamenu-list-link">Billu </Link>
 															</li>
 														</ul>
 														<h6 className="heading-line">Pages</h6>
 														<ul className="megamenu-list list-unstyled">
-															<li className="megamenu-list-item"><a href="text.html"
-																className="megamenu-list-link">About Us </a>
+															<li className="megamenu-list-item"><Link to="/about"
+																className="megamenu-list-link">About Us </Link>
 															</li>
-															<li className="megamenu-list-item"><a href="contact.html"
-																className="megamenu-list-link">Contact </a>
+															<li className="megamenu-list-item"><Link to="/contact"
+																className="megamenu-list-link">Contact </Link>
 															</li>
 														</ul>
 													</div>
@@ -126,8 +143,19 @@ class Header extends Component {
 									</div>
 								</div>
 
-								<div className="nav-item"><a href="contact.html" className="nav-link">Latest Comics</a></div>
-								<div className="nav-item"><a href="contact.html" className="nav-link">Contact Us</a></div>
+								{/* <div className="nav-item"><a href="contact.html" className="nav-link">Latest Comics</a></div>
+								<div className="nav-item"><a href="contact.html" className="nav-link">Contact Us</a></div> */}
+								<div className="nav-item" >
+									<form onSubmit={this.handleSubmit} className="form-inline input-group">
+									<input type="text" onChange={this.handleChange} className="form-control mx-sm-3" placeholder="Search" />
+									<div className="input-group-append">
+										<button type="submit" formAction='' className="pr-1">
+										<FontAwesomeIcon icon={faSearch} style={{color:"#ffd900"}}/>
+										</button>
+									</div>
+									</form>
+								</div>
+			
 								<div className="nav-item">
 									<ul className="list-inline">
 										<li className="list-inline-item">
@@ -137,10 +165,10 @@ class Header extends Component {
 											</a>
 										</li>
 										<li className="list-inline-item">
-											<a href="cart.html" className="nav-link">
+											<Link to='/cart' className="nav-link">
 												<div className="icon cart"><FontAwesomeIcon icon={faShoppingCart} style={{color:"#000000"}}/><sup style={{color:"#000000"}}>{cartItems.length}</sup>
 												</div>
-											</a>
+											</Link>
 										</li>
 									</ul>
 								</div>
@@ -159,5 +187,11 @@ const mapStateToProps = (state) => {
 		user: state.auth
 	}
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getProducts: (tag) => dispatch(getProducts(tag))
+    }
+}
 
-export default connect(mapStateToProps)(Header);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
