@@ -12,7 +12,7 @@ router.post("/checkout", async (req, res) => {
     let error;
     let status;
     try {
-      const { product, token, subTotal, user } = req.body;
+      const { products, token, subTotal, user } = req.body;
       const customer = await stripe.customers.create({
         email: token.email,
         source: token.id
@@ -44,11 +44,11 @@ router.post("/checkout", async (req, res) => {
     );
     //console.log("Charge:", { charge });
     status = "success";
-    //console.log(user, "user from session")
-    console.log(product)
-    const newOrder = {userId : user.user.email, totalPrice : subTotal, product}
+    console.log(user, "user from session")
+    console.log(products)
+    const newOrder = {userId : user.email, totalPrice : subTotal, products}
         const orderResponse = await Orders.create(newOrder)
-        const userResponse = await Users.findOneAndUpdate({email : user.user.email}, {orders : newOrder})
+        const userResponse = await Users.findOneAndUpdate({email : user.email}, {orders : newOrder})
         console.log(orderResponse, userResponse)
     } catch (error) {
       console.error("Error:", error);

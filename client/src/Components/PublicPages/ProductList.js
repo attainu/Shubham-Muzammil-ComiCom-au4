@@ -16,6 +16,11 @@ class ProductList extends Component {
     addToCart = (i) => {
         this.props.addToCart(this.props.product[i])
     }
+
+    componentDidUpdate() {
+        let tag = this.props.match.params.tag;
+        this.props.getProducts(tag)
+    }
     render() {
         return (
             <div className="category-page">

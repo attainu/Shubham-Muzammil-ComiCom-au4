@@ -3,7 +3,7 @@ import Dashboard from './Components/Dashboard/Dashboard'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Signin from './Components/SignIn'
 import Signup from './Components/Signup'
-import Pages from './Components/PublicPages/Pages';
+//import Pages from './Components/PublicPages/Pages';
 import { setUserInfo } from "./Redux/action_creators/actions";
 import Header from './Components/PublicPages/Header';
 import './styles/style.css'
@@ -11,7 +11,7 @@ import Home from './Components/PublicPages/Home';
 import Footer from './Components/PublicPages/Footer';
 import ProductList from './Components/PublicPages/ProductList';
 import ProductDetail from './Components/PublicPages/ProductDetail';
-import Cart from './Components/PublicPages/Cart';
+import Cart from './Components/Cart';
 import decode from 'jwt-decode';
 import { setToken } from './Api/users'
 import store from './Redux/reducers/index';

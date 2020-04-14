@@ -9,7 +9,7 @@ const ordersSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    product: {
+    products: {
         name: {
             type: String
         },
