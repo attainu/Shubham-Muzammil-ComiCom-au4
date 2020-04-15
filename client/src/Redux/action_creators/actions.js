@@ -35,6 +35,8 @@ export const signUser = (formInfo) => {
       localStorage.setItem('jwtToken', info.data.token);
       setToken(info.data.token);
       dispatch(setUserInfo(info.data.user));
+      dispatch({type : "ADD_TO_CART_INITIAL", payload: info.data.user.cartItems})
+      dispatch({type : "ADD_TO_WISHLIST_INITIAL", payload: info.data.user.wishList})
     } catch (error) {
       console.log("error in signinUser", error)
     }

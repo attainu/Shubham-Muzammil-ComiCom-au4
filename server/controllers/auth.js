@@ -4,8 +4,9 @@ import jwt from 'jsonwebtoken';
 
 export const currentUserInfo = async (req, res) => {
     if (req.user) {
-        const token = jwt.sign( {user: req.user} , "somerandomkey");
-        req.password = undefined
+        let {email, userName, cartItems, wishList, orders} = req.user;
+        const token = jwt.sign( {email, userName, cartItems, wishList, orders} , "somerandomkey");
+        // req.password = undefined
         res.json({
             success: true,
             message: "user has successfully authenticated",
@@ -49,7 +50,8 @@ export const registerUser = async (req, res) => {
                         message: "User Already Exists"
                     })
                 }
-                const token = jwt.sign({ user: response }, "somerandomkey")
+                let {email, userName, cartItems, wishList, orders} = response;
+                const token = jwt.sign({email, userName, cartItems, wishList, orders}, "somerandomkey")
                 return res.json({
                     success: true,
                     message: "user has successfully registered",
@@ -92,7 +94,8 @@ export const loginUser = async (req, res) => {
                 }
                 let userInfo = user;
                 userInfo.password = undefined;
-                const token = jwt.sign({ user: userInfo }, "somerandomkey");
+                let {email, userName, cartItems, wishList, orders} = userInfo;
+                const token = jwt.sign({ email, userName, cartItems, wishList, orders }, "somerandomkey");
                 req.session.user = userInfo;
                 res.cookies = userInfo
                 return res.json({

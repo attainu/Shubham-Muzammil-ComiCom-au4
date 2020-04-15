@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getProducts, addComicToCart } from "../../Redux/action_creators/productActions";
+import { getProducts, addComicToCart, addComicToWishlist } from "../../Redux/action_creators/productActions";
 import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
@@ -14,7 +14,11 @@ class ProductList extends Component {
     }
 
     addToCart = (i) => {
-        this.props.addToCart(this.props.product[i])
+        this.props.addToCart(this.props.product[i], this.props.userEmail)
+    }
+
+    addToWishlist = (i) => {
+        this.props.addToWishlist(this.props.product[i], this.props.userEmail)
     }
 
     componentDidUpdate() {
@@ -62,7 +66,7 @@ class ProductList extends Component {
                                                 <div className="product-image">
                                                     <img src={data.imgURL.main} alt="comic" />
                                                     <div className="overlay">
-                                                        <a href='/s' className="wishlist"><FontAwesomeIcon icon={faHeart} style={{ color: "#000" }} /></a>
+                                                        <button onClick={() => this.addToWishlist(index)} className="wishlist"><FontAwesomeIcon icon={faHeart} style={{ color: "#000" }} /></button>
                                                         <ul className="list-unstyled">
                                                             <li><Link to={`/product/detail/${data._id}`} className="btn btn-unique">View Detail</Link></li>
                                                             <li><div onClick={() => this.addToCart(index)} className="btn btn-dark">Add To Cart</div></li>
@@ -109,13 +113,15 @@ class ProductList extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        product: state.product.displayProducts
+        product: state.product.displayProducts,
+        userEmail : state.auth.user.email
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart : (product) => dispatch(addComicToCart(product)),
+        addToCart : (product, userEmail) => dispatch(addComicToCart(product, userEmail)),
+        addToWishlist : (product, userEmail) => dispatch(addComicToWishlist(product, userEmail)),
         getProducts: (tag) => dispatch(getProducts(tag))
     }
 }

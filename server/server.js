@@ -14,7 +14,7 @@ import payment from './routes/payment'
 app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "http://localhost:3000");
 	res.header("Access-Control-Allow-Credentials", "true");
-	res.header("Access-Control-Allow-Methods: PUT, GET, POST");
+	res.header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
 	res.header(
 		"Access-Control-Allow-Headers",
 		"Origin, X-Requested-With, Content-Type, Accept, Authorization"
@@ -39,7 +39,7 @@ app.use('/auth', routes.auth);
 app.use('/products', products)
 app.use('/search', search)
 app.use('/payment', payment)
-
+app.use('/feature', routes.feature);
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';

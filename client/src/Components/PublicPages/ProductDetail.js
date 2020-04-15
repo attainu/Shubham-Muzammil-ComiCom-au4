@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { getProductDetail, addComicToCart } from "../../Redux/action_creators/productActions";
+import { getProductDetail, addComicToCart, addComicToWishlist } from "../../Redux/action_creators/productActions";
 import '../../styles/style.css'
 import Carousel from 'react-bootstrap/Carousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,7 +16,11 @@ class ProductDetail extends Component {
     }
 
     addToCart = () => {
-        this.props.addToCart(this.props.detail)
+        this.props.addToCart(this.props.detail, this.props.userEmail)
+    }
+
+    addToWishlist = () => {
+        this.props.addToWishlist(this.props.detail, this.props.userEmail)
     }
 
     render() {
@@ -41,7 +45,7 @@ class ProductDetail extends Component {
                                     <Carousel.Item>
                                         {detail.imgURL && detail.imgURL.posters.map((data, index) => {
                                             return (
-                                                <img src={data} className="d-block mx-auto" alt="poster" />
+                                                <img src={data} key={index} className="d-block mx-auto" alt="poster" />
                                             )
                                         })}
                                     </Carousel.Item>
@@ -84,7 +88,9 @@ class ProductDetail extends Component {
                                             <li className="list-inline-item">
                                                 <button onClick={this.addToCart} className="btn btn-unique">Add To Cart</button>
                                             </li>
-                                            <li className="list-inline-item"><a href="/g" className="btn btn-dark">Add to wishlist<FontAwesomeIcon icon={faHeart} style={{ color: "#ffd900" }} /></a></li>
+                                            <li className="list-inline-item">
+                                                <button onClick={this.addToWishlist} className="btn btn-dark">Add to wishlist<FontAwesomeIcon icon={faHeart} style={{ color: "#ffd900" }} /></button>
+                                            </li>
                                         </ul>
                                     </div>
                                 </>
@@ -98,16 +104,17 @@ class ProductDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state here in profile", state)
     return {
-        detail: state.product.displayProductsDetail
+        detail: state.product.displayProductsDetail,
+        userEmail : state.auth.user.email
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getProductDetail: (id) => dispatch(getProductDetail(id)),
-        addToCart : (product) => dispatch(addComicToCart(product))
+        addToCart : (product, userEmail) => dispatch(addComicToCart(product, userEmail)),
+        addToWishlist : (product, userEmail) => dispatch(addComicToWishlist(product, userEmail))
     }
 }
 

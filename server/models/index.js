@@ -8,6 +8,7 @@ let dbURL = `mongodb+srv://comicom:sharp@cluster0-iabea.mongodb.net/test?retryWr
 function connect() {
     return mongoose.connect(dbURL, {
         useNewUrlParser : true,
+        useFindAndModify: false,
         useUnifiedTopology: true
     });
 }

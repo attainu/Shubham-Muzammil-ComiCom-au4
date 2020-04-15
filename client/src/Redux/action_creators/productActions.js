@@ -1,4 +1,5 @@
 import { fetchProducts, fetchAllProducts, fetchProductDetail } from '../../Api/product'
+import { addItemToCart, addItemToWishlist } from '../../Api/feature';
 
 //for sending list to store on first load
 export const putProducts = (productData) => {
@@ -42,13 +43,25 @@ export const getProductDetail = (id) => {
         }
     }
 }
-
-export const addComicToCart = (product) => {
+//need to add an api call and check if user is auth before calling api
+export const addComicToCart = (product, userInfo) => {
     return async(dispatch) => {
         try {
+            await addItemToCart(product, userInfo)
             dispatch({type : "ADD_TO_CART", payload: product})
         } catch (error) {
             console.error("Error in productAction addComicToCart",error)
+        }
+    }
+}
+
+export const addComicToWishlist = (product, userInfo) => {
+    return async(dispatch) => {
+        try {
+            await addItemToWishlist(product, userInfo)
+            dispatch({type : "ADD_TO_WISHLIST", payload: product})
+        } catch (error) {
+            console.error("Error in productAction addItemToWishlist",error)
         }
     }
 }

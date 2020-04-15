@@ -21,15 +21,7 @@ const userSchema = new mongoose.Schema({
        type : Object
     },
     cartItems: {
-        productID : { 
-            type : Number 
-        },
-        quantity : { 
-            type : Number 
-        },
-        totalPrice : { 
-            type : Number 
-        }
+        type : Array 
     },
     interests: {
         type: Array
