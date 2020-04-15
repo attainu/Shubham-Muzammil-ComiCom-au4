@@ -2,7 +2,6 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons"
 
-
 const Contact = () => {
     return (
         <div className="m-3 p-2">
