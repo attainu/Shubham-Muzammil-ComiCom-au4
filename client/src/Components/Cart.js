@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from 'react-redux';
-import { getUserInfo } from "../Redux/action_creators/actions";
+import { deleteItemFromCart, handleCartQuantity, clearItemFromCart } from "../Redux/action_creators/productActions";
 import { Link } from 'react-router-dom';
 
 
@@ -14,66 +14,26 @@ toast.configure();
 
 
 class Cart extends Component {
-    constructor(props) {
-        super(props)
-        this.props.dispatch(getUserInfo());
-    }
-
-    state = {
-        products: [], 
-        subTotal : null
-    }
-    async componentDidMount() {
-        await this.updateState()
-    }
-
-    updateState = () => {
-        const {cart} = this.props
-        this.setState({
-            products : cart,
-        })
-    }
-    calculateTotal = () => {
-        const {products, subTotal} = this.state
-        console.log(products)
-        const total = products.reduce((acc, cv) => {
-            return acc + (cv.discountedPrice * cv.quantity)
-        }, 0)
-        if(subTotal !== total) {
-            this.setState({
-                subTotal : total
-            })
-        }
-        return total
-    }
-
 
     handleQuantity = (id, e) => {
-        const {products} = this.state
-        if(e.target.value === '0' ){
-            this.deleteItem(id)
-        }else {
-            products[id].quantity = e.target.value
-        }
-        this.setState({
-            products
-        }) 
+        this.props.handleQuantity(id, e.target.value)
     }
 
     deleteItem = (id) => {
-        const {products} = this.state
-        products.splice(id, 1)
-        this.setState({
-            products
-        })
+        this.props.deleteItem(id)
     }
 
     handleToken = async (token) => {
-        const {products, subTotal} = this.state
-        const {user} = this.props
+        // cart item clear
+        const {user, cart} = this.props
+        const subTotal = cart.reduce((acc, cv) => {
+            return acc + (cv.discountedPrice * cv.quantity)
+        }, 0)
+        let products = cart
         const response = await axios.post('http://localhost:9090/payment/checkout', {token, products, user, subTotal})
         const {status} = response.data
         if(status === "success") {
+            this.props.clearCart()
             toast('Success, Check email for details', {type: 'success'})
         }else {
             toast('Something went wrong', {type : "error"})
@@ -81,7 +41,10 @@ class Cart extends Component {
     }
 
     render() {
-        const {products, subTotal} = this.state
+        const {cart, auth} = this.props
+        const total = cart.reduce((acc, cv) => {
+            return acc + (cv.discountedPrice * cv.quantity)
+        }, 0)
         return (
             <div className="container">
                 <table id="cart" className="table table-hover table-condensed">
@@ -95,7 +58,7 @@ class Cart extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {products ? products.map((product, index) => {
+                        {cart ? cart.map((product, index) => {
                            return (
                                <tr key = {index}>
                                 <td data-th="Product">
@@ -122,17 +85,18 @@ class Cart extends Component {
                         <tr>
                             <td><Link to="/product/all" className="btn btn-warning"><i className="fa fa-angle-left"></i> Continue Shopping</Link></td>
                             <td colSpan="2" className="hidden-xs"></td>
-                            <td className="hidden-xs text-center"><strong>Total {this.calculateTotal()}</strong></td>
+                            <td className="hidden-xs text-center"><strong>Total {total }</strong></td>
+                            {auth ? 
                             <td><div className="btn btn-success btn-block">Checkout <i className="fa fa-angle-right">
                                 <StripeCheckout
                                 stripeKey="pk_test_e0CmhcAm3715JsIVZSwCK0Cl00u6U8GNww"
                                 token={this.handleToken}
                                 billingAddress
                                 shippingAddress
-                                amount={subTotal * 100}
+                                amount={total * 100}
                                 name={"Comicom order"}
                                 currency="INR" />
-                            </i></div></td>
+                            </i></div></td> : <td><Link to='/signin'><button className="btn btn-dark">Login</button></Link></td>}
                         </tr>
                     </tfoot>
                 </table>
@@ -141,10 +105,18 @@ class Cart extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state, " state in cart")
     return {
         user : state.auth.user,
+        auth : state.auth.isAuthenticated,
         cart  : state.feature.cartItems
     }
 }
-export default connect(mapStateToProps)(Cart)
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleQuantity : (id, val) => dispatch(handleCartQuantity(id, val)),
+        deleteItem : (id) =>dispatch(deleteItemFromCart(id)),
+        clearCart : () =>dispatch(clearItemFromCart())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)

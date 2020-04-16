@@ -39,6 +39,26 @@ export const featureReducer = (state = DEFAULT_STATE, action) => {
             }
             state = stateCopy
             return state
+        case 'DELETE_ITEM_IN_CART':
+            let productId = action.payload
+            stateCopy.cartItems.splice(productId, 1)
+            state = stateCopy
+            return state
+        case 'DELETE_ITEM_IN_WISHLIST':
+            let wishlistProductId = action.payload
+            stateCopy.wishlist.splice(wishlistProductId, 1)
+            state = stateCopy
+            return state
+        case 'HANDLE_QUANTITY':
+            let id = action.productId
+            let quantity = action.value
+            stateCopy.cartItems[id].quantity = quantity
+            state = stateCopy
+            return state
+        case 'CLEAR_ITEM_IN_CART':
+            stateCopy.cartItems = []
+            state = stateCopy
+            return state
         case "ORDER_PLACED" : 
             return state
         default:

@@ -44,12 +44,13 @@ router.post("/checkout", async (req, res) => {
     );
     //console.log("Charge:", { charge });
     status = "success";
-    console.log(user, "user from session")
-    console.log(products)
+    // console.log(user, "user from session")
+    // console.log(products)
     const newOrder = {userId : user.email, totalPrice : subTotal, products}
         const orderResponse = await Orders.create(newOrder)
-        const userResponse = await Users.findOneAndUpdate({email : user.email}, {orders : newOrder})
-        console.log(orderResponse, userResponse)
+        const deleteResponse = await Users.findOneAndUpdate({email : user.email}, {cartItems : []})
+        const userResponse = await Users.findOneAndUpdate({email : user.email}, { $push : {orders : newOrder}})
+        // console.log(orderResponse, userResponse, deleteResponse)
     } catch (error) {
       console.error("Error:", error);
       status = "failure";

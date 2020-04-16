@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         type: Array
     },
     orders: {
-       type : Object
+       type : Array
     },
     cartItems: {
         type : Array 

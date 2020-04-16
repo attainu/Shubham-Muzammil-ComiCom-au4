@@ -65,3 +65,41 @@ export const addComicToWishlist = (product, userInfo) => {
         }
     }
 }
+
+export const deleteItemFromCart = (id) => {
+    return async(dispatch) => {
+        try {
+            dispatch({type : "DELETE_ITEM_IN_CART", payload: id})
+        } catch (error) {
+            console.error("Error in productAction deleteItemFromCart",error)
+        }
+    }
+}
+
+export const handleCartQuantity = ( id, val) => {
+    return async(dispatch) => {
+        try {
+            if(val == '0'){
+                dispatch({type : "DELETE_ITEM_IN_CART", payload: id})
+            } else {
+                dispatch({
+                    type : "HANDLE_QUANTITY", 
+                    productId: id,
+                    value : val
+                })
+            }
+        } catch (error) {
+            console.error("Error in productAction handleCartQuantity",error)
+        }
+    }
+}
+
+export const clearItemFromCart = () => {
+    return async(dispatch) => {
+        try {
+            dispatch({type : "CLEAR_ITEM_IN_CART"})
+        } catch (error) {
+            console.error("Error in productAction handleCartQuantity",error)
+        }
+    }
+}
