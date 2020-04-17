@@ -17,6 +17,7 @@ import { setToken } from './Api/users'
 import store from './Redux/reducers/index';
 import Contact from './Components/PublicPages/Contact';
 import About from './Components/PublicPages/About';
+import WishList from './Components/WishList';
 
 // need to create different components to render pages
 // currently in testing period
@@ -46,6 +47,7 @@ function App() {
           <Route exact path='/product/:tag' component={ProductList} />
           <Route exact path='/product/detail/:id' component={ProductDetail} />
           <Route exact path='/cart' component={Cart} />
+          <Route exact path='/wishlist' component={WishList} />
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
         </Switch>
