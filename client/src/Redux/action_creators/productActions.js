@@ -103,3 +103,13 @@ export const clearItemFromCart = () => {
         }
     }
 }
+
+export const deleteItemFromWishList = (id) => {
+    return async(dispatch) => {
+        try {
+            dispatch({type : "DELETE_ITEM_IN_WISHLIST", payload: id})
+        } catch (error) {
+            console.error("Error in productAction deleteItemFromWishList",error)
+        } 
+    }
+}

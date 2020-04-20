@@ -159,10 +159,10 @@ class Header extends Component {
 								<div className="nav-item">
 									<ul className="list-inline">
 										<li className="list-inline-item">
-											<a id="search" href="/a" className="nav-link">
+											<Link  to="/wishlist" className="nav-link">
 												<div className="icon search"><FontAwesomeIcon icon={faHeart} style={{color:"#ffd900"}}/><sup style={{color:"#ffd900"}}>{wishlist.length}</sup>
 												</div>
-											</a>
+											</Link>
 										</li>
 										<li className="list-inline-item">
 											<Link to='/cart' className="nav-link">
