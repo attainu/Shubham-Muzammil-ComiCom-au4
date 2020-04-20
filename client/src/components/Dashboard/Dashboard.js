@@ -1,5 +1,5 @@
 import React from 'react'
-import './dashboard.css'
+import '../../styles/dashboard.css'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Overview from './Overview'
 import AddComic from './AddComic'
