@@ -27,4 +27,8 @@ router.post('/login', controllers.loginUser);
 router.get('/current', controllers.currentUserInfo)
 router.get('/logout',controllers.currentUserLogout)
 
+//admin routes
+router.post('/admin/login', controllers.loginAdmin);
+router.get('/admin/logout',controllers.currentUserLogout);
+
 export default router;

@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import Users from '../models/Users'
 import jwt from 'jsonwebtoken';
+import Admins from '../models/Admins';
 
 export const currentUserInfo = async (req, res) => {
     if (req.user) {
@@ -113,6 +114,56 @@ export const loginUser = async (req, res) => {
         })
     }
 }
+
+//admin login
+export const loginAdmin = async (req, res) => {
+    try {
+        const { body } = req;
+        const email = body.email;
+        Admins.findOne({ email: email }, (err, user) => {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: "Server error"
+                })
+            }
+            if (!user) {
+                return res.json({
+                    success: false,
+                    message: "Server error"
+                })
+            }
+           /*  bcrypt.compare(body.password, user.password, (error, data) => {
+                if (error) {
+                    return res.json({
+                        success: false,
+                        message: "Server error"
+                    })
+                } */
+                if(user.password === body.password) {
+                    let adminInfo = user;
+                    adminInfo.password = undefined;
+                    let { email } = adminInfo;
+                    const token = jwt.sign({ email }, "somerandomkey");
+                    req.session.user = adminInfo;
+                    res.cookies = adminInfo
+                    return res.json({
+                        success: true,
+                        message: "admin has successfully logged-in",
+                        admin: adminInfo,
+                        token: token
+                    })
+                }
+            });
+        //})
+    } catch {
+        return res.json({
+            success: false,
+            message: "Server error"
+        })
+    }
+}
+
 
 // router.get("/tokenverify", (req, res) => {
 //     const bearer = req.headers["authorization"];
