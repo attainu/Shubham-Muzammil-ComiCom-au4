@@ -43,7 +43,11 @@ class Header extends Component {
 								<ul className="list-inline">
 									<li className="list-inline-item"> <a href="/a">My Account</a></li>
 									<li className="list-inline-item"><Link to="/cart">Order History</Link></li>
-									<li className="list-inline-item"><Link to="/signin">Login</Link></li>
+									{ !this.props.user.isAuthenticated ?
+										<li className="list-inline-item"><Link to="/signin">Login</Link></li>
+										:
+										<li className="list-inline-item"><button onClick={this.props.logout} className='btn btn-logout'>Logout</button></li>
+									}
 								</ul>
 							</div>
 						</div>
@@ -189,7 +193,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getProducts: (tag) => dispatch(getProducts(tag))
+        getProducts: (tag) => dispatch(getProducts(tag)),
+        logout: () => dispatch(logoutUser()),
     }
 }
 

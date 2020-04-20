@@ -1378,3 +1378,10 @@ section .item-details .carousel-item{
   align-items: center;
   justify-content: center;
 }
+
+.btn-logout{
+  color:#ffd900;
+}
+.btn-logout:hover{
+  color: #ff3838;
+}

@@ -62,6 +62,7 @@ export const logoutUser = () => {
     try {
       await signoutUser()
       localStorage.removeItem('jwtToken');
+      localStorage.removeItem('featureState');
       setToken(null);
       dispatch(setUserInfo({}));
     } catch (error) {
