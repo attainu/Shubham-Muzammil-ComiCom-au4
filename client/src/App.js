@@ -11,6 +11,7 @@ import Home from './Components/PublicPages/Home';
 import Footer from './Components/PublicPages/Footer';
 import ProductList from './Components/PublicPages/ProductList';
 import ProductDetail from './Components/PublicPages/ProductDetail';
+import NoFound from './Components/PublicPages/404Page';
 import Cart from './Components/Cart';
 import decode from 'jwt-decode';
 import { setToken } from './Api/users'
@@ -50,6 +51,7 @@ function App() {
           <Route exact path='/wishlist' component={WishList} />
           <Route exact path='/contact' component={Contact} />
           <Route exact path='/about' component={About} />
+          <Route component={NoFound} />
         </Switch>
         <Footer />
       </Fragment>
