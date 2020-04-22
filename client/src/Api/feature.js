@@ -18,4 +18,13 @@ export const addItemToWishlist = async (product, userInfo) => {
     }
 };
 
+export const sendMailToUs = async (formInfo) => {
+    try {
+        const response = await axios.post(`http://localhost:9090/feature/mail`, {formInfo}, { withCredentials: true });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 export default { addItemToCart, addItemToWishlist };

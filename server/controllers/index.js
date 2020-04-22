@@ -1,5 +1,5 @@
 import { currentUserInfo, currentUserLogout, loginUser, registerUser, loginAdmin } from './auth';
-import { addItemToUserCart, addItemToUserWishlist } from './feature';
+import { addItemToUserCart, addItemToUserWishlist, sendMail } from './feature';
 export default({
     currentUserInfo,
     currentUserLogout,
@@ -7,5 +7,6 @@ export default({
     loginUser,
     addItemToUserCart,
     addItemToUserWishlist,
-    loginAdmin
+    loginAdmin,
+    sendMail
 })

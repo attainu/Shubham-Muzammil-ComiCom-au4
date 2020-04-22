@@ -1,4 +1,4 @@
-import { addItemToCart, addItemToWishlist } from '../../Api/feature';
+import { addItemToCart, addItemToWishlist, sendMailToUs } from '../../Api/feature';
 
 //need to add an api call and check if user is auth before calling api
 export const addComicToCart = (product, userInfo) => {
@@ -74,4 +74,10 @@ export const deleteItemFromWishList = (id) => {
             console.error("Error in productAction deleteItemFromWishList",error)
         } 
     }
+}
+
+export const sendMail = async (formInfo) => {
+    let success = await sendMailToUs(formInfo)
+    console.log(formInfo)
+    return success
 }

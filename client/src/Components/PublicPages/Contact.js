@@ -1,90 +1,120 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { sendMail } from '../../Redux/action_creators/featureActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons"
+toast.configure();
 
-const Contact = () => {
-    return (
-        <div className="m-3 p-2">
-            <div class="jumbotron jumbotron-sm">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-12">
-                            <h1 class="h1">
-                                Contact us <small>Feel free to contact us</small></h1>
+class Contact extends Component {
+
+    state={
+        name : '',
+        email : '',
+        subject : '',
+        message : ''
+    }
+
+    handleChange=(e)=>{
+        this.setState({
+            [e.target.name] : e.target.value
+        })
+    }
+
+    handleSubmit=()=>{
+        let { name, email, subject, message} = this.state;
+        if(name && email && subject && message){
+            let message = sendMail(this.state)
+            if(message) {
+                toast('Mail Send, Will reply soon', {type: 'success'})
+            }else {
+                toast('Sorry, Something went wrong', {type : "error"})
+            }
+        }
+    }
+
+    render(){
+        return (
+            <div className="m-3 p-2">
+                <div className="jumbotron jumbotron-sm">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-12 col-lg-12">
+                                <h1 className="h1">
+                                    Contact us <small>Feel free to contact us</small></h1>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="well well-sm">
-                            <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">
-                                            Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8">
+                            <div className="well well-sm">
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <label htmlFor="name">
+                                                Name<span style={{color:"red"}}>*</span></label>
+                                            <input onChange={(e)=>{this.handleChange(e)}} name="name" type="text" className="form-control" id="name" placeholder="Enter name" required="required" />
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="email">
+                                                Email Address<span style={{color:"red"}}>*</span></label>
+                                            <div className="input-group">
+                                                <span className="input-group-addon"><span className="glyphicon glyphicon-envelope"></span>
+                                                </span>
+                                                <input onChange={(e)=>{this.handleChange(e)}} name="email" type="email" className="form-control" id="email" placeholder="Enter email" required="required" /></div>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="subject">
+                                                Subject<span style={{color:"red"}}>*</span></label>
+                                            <select value={this.state.subject} onChange={(e)=>{this.handleChange(e)}} id="subject" name="subject" className="form-control" required="required">
+                                                <option value="na">Choose One:</option>
+                                                <option value="General Customer Service">General Customer Service</option>
+                                                <option value="Suggestions">Suggestions</option>
+                                                <option value="Product Support">Product Support</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email">
-                                            Email Address</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
-                                            </span>
-                                            <input type="email" class="form-control" id="email" placeholder="Enter email" required="required" /></div>
+                                    <div className="col-md-6">
+                                        <div className="form-group">
+                                            <label htmlFor="name">
+                                                Message<span style={{color:"red"}}>*</span></label>
+                                            <textarea onChange={(e)=>{this.handleChange(e)}} name="message" id="message" className="form-control" rows="9" cols="25" required="required"
+                                                placeholder="Message"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="subject">
-                                            Subject</label>
-                                        <select id="subject" name="subject" class="form-control" required="required">
-                                            <option value="na" selected="">Choose One:</option>
-                                            <option value="service">General Customer Service</option>
-                                            <option value="suggestions">Suggestions</option>
-                                            <option value="product">Product Support</option>
-                                        </select>
+                                    <div className="col-md-12">
+                                        <button onClick={()=>{this.handleSubmit()}} type="submit" className="btn pull-right" id="btnContactUs" style={{background:"#ffd900"}}>
+                                            Send Message</button>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">
-                                            Message</label>
-                                        <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                                            placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn pull-right" id="btnContactUs" style={{background:"#ffd900"}}>
-                                        Send Message</button>
                                 </div>
                             </div>
+                        </div>
+                        <div className="col-md-4">
+                            <form>
+                            <legend><span className="glyphicon glyphicon-globe"></span>										<FontAwesomeIcon icon={faGlobeAmericas} style={{color:"#ffd900"}}/>
+                                 Our office</legend>
+                            <address>
+                                <strong>Comicom, Inc.</strong><br />
+                                795 Folsom Ave, Suite 600<br />
+                                San Francisco, CA 94107<br />
+                                <abbr title="Phone">
+                                    P:</abbr>
+                                (123) 456-7890
+                            </address>
+                            <address>
+                                <strong>Full Name</strong><br />
+                                <a href="mailto:#">first.last@example.com</a>
+                            </address>
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <form>
-                        <legend><span class="glyphicon glyphicon-globe"></span>										<FontAwesomeIcon icon={faGlobeAmericas} style={{color:"#ffd900"}}/>
-                             Our office</legend>
-                        <address>
-                            <strong>Comicom, Inc.</strong><br />
-                            795 Folsom Ave, Suite 600<br />
-                            San Francisco, CA 94107<br />
-                            <abbr title="Phone">
-                                P:</abbr>
-                            (123) 456-7890
-                        </address>
-                        <address>
-                            <strong>Full Name</strong><br />
-                            <a href="mailto:#">first.last@example.com</a>
-                        </address>
-                        </form>
-                    </div>
                 </div>
+    
             </div>
-
-        </div>
-    )
+        )
+    }
 }
 
 export default Contact

@@ -1,4 +1,5 @@
 import Users from '../models/Users'
+import {transporter} from '../services/nodemailer'
 
 export const addItemToUserCart = async (req, res) => {
     try {
@@ -77,6 +78,35 @@ export const addItemToUserWishlist = async (req, res) => {
         return res.json({
             success: false,
             message: error
+        });
+    }
+}
+
+export const sendMail = async (req, res) => {
+    try {
+        let {name, email, subject, message} = req.body.formInfo;
+        const mailOptions = {
+            from : email,
+            to : '2020comicom@gmail.com',
+            subject : subject,
+            message : `Message from ${name} is ${message}`
+        };
+    
+        transporter.sendMail(mailOptions, (err, data) => {
+            if (err) {
+                console.log("error", err)
+                return res.json({
+                    success: false
+                });
+            }
+            console.log("success")
+            return res.json({
+                success: true
+            });
+        });
+    } catch (error) {
+        return res.json({
+            success: false
         });
     }
 }
