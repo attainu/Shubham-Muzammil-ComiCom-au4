@@ -14,7 +14,7 @@ const About = () => {
                   <li class="col-12 col-md-6 col-lg-3 m-2">
                      <div class="cnt-block equal-hight" style={{height: "349px;"}}>
                         <figure><img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574846692/shubham_uxnlr9.jpg" class="img-responsive" alt="" /></figure>
-                        <h3><a href="#">Shubham </a></h3>
+                        <h3>Shubham </h3>
                         <p>Full Stack Developer</p>
                         <ul class="follow-us clearfix">
                         <li><a href="https://github.com/shubham-ambastha-vst-au4" class="fa fa-github"></a></li>
@@ -26,7 +26,7 @@ const About = () => {
                   <li class="col-12 col-md-6 col-lg-3 m-2">
                      <div class="cnt-block equal-hight" style={{height: "349px;"}}>
                         <figure><img src="https://res.cloudinary.com/eagle-whitecollar/image/upload/v1574846692/muzammil_qxaqga.jpg" class="img-responsive" alt="" /></figure>
-                        <h3><a href="http://www.webcoderskull.com/">Muzammil </a></h3>
+                        <h3>Muzammil </h3>
                         <p>Full Stack Developer</p>
                         <ul class="follow-us clearfix">
                         <li><a href="http://github.com/muzammil-khan-vst-au4" class="fa fa-github"></a></li>

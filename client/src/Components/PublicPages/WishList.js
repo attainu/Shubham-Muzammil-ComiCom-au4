@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { deleteItemFromWishList, addComicToCart } from "../Redux/action_creators/productActions";
+import { deleteItemFromWishList, addComicToCart } from "../../Redux/action_creators/featureActions";
 
 
 class WishList extends Component {

@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from 'react-redux';
-import { deleteItemFromCart, handleCartQuantity, clearItemFromCart } from "../Redux/action_creators/productActions";
+import { deleteItemFromCart, handleCartQuantity, clearItemFromCart } from "../../Redux/action_creators/featureActions";
 import { Link } from 'react-router-dom';
 
 

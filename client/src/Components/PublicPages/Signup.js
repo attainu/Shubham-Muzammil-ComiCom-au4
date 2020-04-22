@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../Redux/action_creators/actions';
-// import { Link } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
-import '../styles/signin.css'
+import { registerUser } from '../../Redux/action_creators/actions';
+import { Redirect, Link } from 'react-router-dom'
+import '../../styles/signin.css'
 
 let comic = 'https://res.cloudinary.com/comicom/image/upload/v1586243312/Pages%20Image/Signin-Signup/back2_ubkwo5.jpg';
 
@@ -73,7 +72,7 @@ class Signup extends Component {
 							</div>
 							<div className="w-full text-center p-t-55">
 								<span className="txt2">Already a member?</span>
-								<a href="/signin" className="txt2 bo1">Sign In now</a>
+								<Link to="/signin" className="txt2 bo1">Sign In now</Link>
 							</div>
 						</form>
 					</div>

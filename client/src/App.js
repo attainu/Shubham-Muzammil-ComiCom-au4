@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import Dashboard from './Components/Dashboard/Dashboard'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Signin from './Components/SignIn'
-import Signup from './Components/Signup'
+import Signin from './Components/PublicPages/SignIn'
+import Signup from './Components/PublicPages/Signup'
 import AdminLogin from './Components/Dashboard/AdminLogin';
 import { setUserInfo } from "./Redux/action_creators/actions";
 import Header from './Components/PublicPages/Header';
@@ -12,18 +12,14 @@ import Footer from './Components/PublicPages/Footer';
 import ProductList from './Components/PublicPages/ProductList';
 import ProductDetail from './Components/PublicPages/ProductDetail';
 import NoFound from './Components/PublicPages/404Page';
-import Cart from './Components/Cart';
+import Cart from './Components/PublicPages/Cart';
 import decode from 'jwt-decode';
 import { setToken } from './Api/users'
 import store from './Redux/reducers/index';
 import Contact from './Components/PublicPages/Contact';
 import About from './Components/PublicPages/About';
-import WishList from './Components/WishList';
+import WishList from './Components/PublicPages/WishList';
 
-// need to create different components to render pages
-// currently in testing period
-
-// testing auth thing
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);
   try {
@@ -38,7 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <Fragment>
-		    {window.location.pathname !== ( '/dashboard' || '/dashboard/add' || '/dashboard/orders') ? <Header /> : null}
+		    <Header />
         <Switch>
           <Route path='/signup' component={Signup} />
           <Route path='/signin' component={Signin} />

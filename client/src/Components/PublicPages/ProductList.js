@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getProducts, addComicToCart, addComicToWishlist } from "../../Redux/action_creators/productActions";
+import { getProducts } from "../../Redux/action_creators/productActions";
+import { addComicToCart, addComicToWishlist } from "../../Redux/action_creators/featureActions";
 import '../../styles/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from "@fortawesome/free-solid-svg-icons"

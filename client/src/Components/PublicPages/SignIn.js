@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router'
-import { signUser } from '../Redux/action_creators/actions';
+import { signUser } from '../../Redux/action_creators/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faGooglePlusG } from "@fortawesome/free-brands-svg-icons"
-import '../styles/signin.css'
+import '../../styles/signin.css'
 
 let comic = 'https://res.cloudinary.com/comicom/image/upload/v1586243313/Pages%20Image/Signin-Signup/back_umhv8x.jpg';
 

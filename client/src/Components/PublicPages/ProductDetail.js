@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { getProductDetail, addComicToCart, addComicToWishlist } from "../../Redux/action_creators/productActions";
+import { getProductDetail } from "../../Redux/action_creators/productActions";
+import { addComicToCart, addComicToWishlist } from "../../Redux/action_creators/featureActions";
 import '../../styles/style.css'
 import Carousel from 'react-bootstrap/Carousel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

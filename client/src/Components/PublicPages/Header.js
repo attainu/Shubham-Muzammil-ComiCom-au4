@@ -13,11 +13,13 @@ class Header extends Component {
 		query: '',
 		redirect: false
 	}
+	
 	handleChange = (e) => {
 		this.setState({
 			query : e.target.value
 		})
 	}
+
 	handleSubmit = (e) => {
 		e.preventDefault()
 		const {query} = this.state
@@ -26,14 +28,19 @@ class Header extends Component {
 			this.setState({redirect : true})
 		}
 	}
+
+	renderRedirect = () => {
+		const {query, redirect} = this.state
+		if (redirect) {
+		  return <Redirect to={`/product/${query}`} />
+		}
+	}
+
 	render() {
 		let {wishlist, cartItems} = this.props.feature
-		const {query, redirect} = this.state
-		if(redirect) {
-			return <Redirect to={`/product/${query}`} />
-		}
 		return (
 			<>
+				{this.renderRedirect()}
 				<div className="top-bar d-none d-sm-block">
 					<div className="container">
 						<div className="row">
