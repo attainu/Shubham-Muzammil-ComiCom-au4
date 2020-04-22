@@ -53,7 +53,7 @@ ul{
 
 
 .our-webcoderskull{
-  background: url("http://www.webcoderskull.com/img/right-sider-banner.png") no-repeat center top / cover;
+  background: url("https://res.cloudinary.com/comicom/image/upload/v1587547909/Pages%20Image/right-sider-banner_ktqcpt.png") no-repeat center top / cover;
   
 }
 .our-webcoderskull .cnt-block{ 
@@ -111,5 +111,5 @@ ul{
    color:#767676;
 }
 .our-webcoderskull .cnt-block .follow-us li .fa:hover{ 
-   color:#025a8e;
+   color:#ffd900;
 }

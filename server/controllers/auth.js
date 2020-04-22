@@ -133,13 +133,6 @@ export const loginAdmin = async (req, res) => {
                     message: "Server error"
                 })
             }
-           /*  bcrypt.compare(body.password, user.password, (error, data) => {
-                if (error) {
-                    return res.json({
-                        success: false,
-                        message: "Server error"
-                    })
-                } */
                 if(user.password === body.password) {
                     let adminInfo = user;
                     adminInfo.password = undefined;
@@ -155,7 +148,6 @@ export const loginAdmin = async (req, res) => {
                     })
                 }
             });
-        //})
     } catch {
         return res.json({
             success: false,

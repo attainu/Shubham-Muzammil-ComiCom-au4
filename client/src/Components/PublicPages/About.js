@@ -17,9 +17,9 @@ const About = () => {
                         <h3><a href="#">Shubham </a></h3>
                         <p>Full Stack Developer</p>
                         <ul class="follow-us clearfix">
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="https://github.com/shubham-ambastha-vst-au4" class="fa fa-github"></a></li>
+                        <li><a href="mailto:shubhams.saurav@gmail.com" class="fa fa-google"></a></li>
+                        <li><a href="https://www.linkedin.com/in/shubhamambastha" class="fa fa-linkedin"></a></li>
                         </ul>
                      </div>
                   </li>
@@ -29,9 +29,9 @@ const About = () => {
                         <h3><a href="http://www.webcoderskull.com/">Muzammil </a></h3>
                         <p>Full Stack Developer</p>
                         <ul class="follow-us clearfix">
-                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="http://github.com/muzammil-khan-vst-au4" class="fa fa-github"></a></li>
+                        <li><a href="mailto:muzammil.khan@outlook.in" class="fa fa-google"></a></li>
+                        <li><a href="http://www.linkedin.com/in/muzammil-khan-" class="fa fa-linkedin"></a></li>
                         </ul>
                      </div>
                   </li>

@@ -1,4 +1,4 @@
-import { currentUserInfo, currentUserLogout, loginUser, registerUser } from './auth';
+import { currentUserInfo, currentUserLogout, loginUser, registerUser, loginAdmin } from './auth';
 import { addItemToUserCart, addItemToUserWishlist } from './feature';
 export default({
     currentUserInfo,
@@ -6,5 +6,6 @@ export default({
     registerUser,
     loginUser,
     addItemToUserCart,
-    addItemToUserWishlist
+    addItemToUserWishlist,
+    loginAdmin
 })

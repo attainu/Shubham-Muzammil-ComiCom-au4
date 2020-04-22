@@ -35,11 +35,11 @@ class Footer extends Component {
                             <div className="col-lg-2 col-sm-6">
                                 <h3>Extras</h3>
                                 <ul className="list-unstyled">
-                                    <li> <a href="/footer">Footer Link</a></li>
-                                    <li> <a href="/footer">Footer Link</a></li>
-                                    <li> <a href="/footer">Footer Link</a></li>
-                                    <li> <a href="/footer">Footer Link</a></li>
-                                    <li> <a href="/footer">Footer Link</a></li>
+                                    <li> <Link to="/admin/login">Admin Panel</Link></li>
+                                    <li> <Link to="/footer">Footer Link</Link></li>
+                                    <li> <Link to="/footer">Footer Link</Link></li>
+                                    <li> <Link to="/footer">Footer Link</Link></li>
+                                    <li> <Link to="/footer">Footer Link</Link></li>
                                 </ul>
                             </div>
                             <div className="col-lg-4 col-sm-6 details js-pull">

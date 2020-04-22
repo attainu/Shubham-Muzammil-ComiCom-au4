@@ -68,7 +68,6 @@ class AddComic extends React.Component {
     
     render() {
         const {name, description, itemsInStock, publication, regularPrice, tags, category, discountedPrice, characters, redirect} = this.state
-
         if (redirect) {
            return <Redirect to="/dashboard" />
         }

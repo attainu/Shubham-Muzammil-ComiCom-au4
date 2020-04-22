@@ -3,7 +3,7 @@ import Dashboard from './Components/Dashboard/Dashboard'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Signin from './Components/SignIn'
 import Signup from './Components/Signup'
-//import Pages from './Components/PublicPages/Pages';
+import AdminLogin from './Components/Dashboard/AdminLogin';
 import { setUserInfo } from "./Redux/action_creators/actions";
 import Header from './Components/PublicPages/Header';
 import './styles/style.css'
@@ -37,11 +37,11 @@ function App() {
   return (
     <BrowserRouter>
       <Fragment>
-        <Header />
+		    {window.location.pathname !== ( '/dashboard' || '/dashboard/add' || '/dashboard/orders') ? <Header /> : null}
         <Switch>
           <Route path='/signup' component={Signup} />
           <Route path='/signin' component={Signin} />
-          {/* <Route path='/' component={Pages} /> */}
+          <Route path='/admin/login' component={AdminLogin} />
           <Route path='/dashboard' component={Dashboard} />
           <Route exact path='/' component={Home} />
           <Route exact path='/product/:tag' component={ProductList} />
