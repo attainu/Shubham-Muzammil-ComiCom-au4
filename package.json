@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node server.js",
-    "dev": "nodemon --exec babel-node server.js"
+    "client-install": "npm install --prefix client",
+    "server": "nodemon server.js --exec babel-node --presets babel-preset-env",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Shubham Ambastha , Muzammil Khan",
   "license": "ISC",
@@ -16,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.21.0",
+    "concurrently": "^5.1.0",
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

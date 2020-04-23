@@ -41,11 +41,13 @@ app.use('/search', search)
 app.use('/payment', payment)
 app.use('/feature', routes.feature);
 
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('/*', function (req, res) {
-   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+if (process.env.NODE_ENV === 'production') {
+	
+	app.use(express.static('client/build'));
+	app.get('*', function (req, res) {
+	res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
