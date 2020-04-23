@@ -30,7 +30,7 @@ class Cart extends Component {
             return acc + (cv.discountedPrice * cv.quantity)
         }, 0)
         let products = cart
-        const response = await axios.post('http://localhost:9090/payment/checkout', {token, products, user, subTotal})
+        const response = await axios.post('/payment/checkout', {token, products, user, subTotal})
         const {status} = response.data
         if(status === "success") {
             this.props.clearCart()

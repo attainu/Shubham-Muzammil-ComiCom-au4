@@ -8,7 +8,7 @@ import './services/passport';
 import products from "./routes/products";
 import search from './routes/search'
 import payment from './routes/payment'
-
+import path from 'path'
 
 //middlewares
 app.use(function (req, res, next) {
@@ -40,6 +40,12 @@ app.use('/products', products)
 app.use('/search', search)
 app.use('/payment', payment)
 app.use('/feature', routes.feature);
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function (req, res) {
+   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
