@@ -1,24 +1,24 @@
 import React, { Fragment } from 'react';
-import Dashboard from './Components/Dashboard/Dashboard'
+import Dashboard from './components/Dashboard/Dashboard'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Signin from './Components/PublicPages/SignIn'
-import Signup from './Components/PublicPages/Signup'
-import AdminLogin from './Components/Dashboard/AdminLogin';
+import Signin from './components/PublicPages/SignIn'
+import Signup from './components/PublicPages/Signup'
+import AdminLogin from './components/Dashboard/AdminLogin';
 import { setUserInfo } from "./Redux/action_creators/actions";
-import Header from './Components/PublicPages/Header';
+import Header from './components/PublicPages/Header';
 import './styles/style.css'
-import Home from './Components/PublicPages/Home';
-import Footer from './Components/PublicPages/Footer';
-import ProductList from './Components/PublicPages/ProductList';
-import ProductDetail from './Components/PublicPages/ProductDetail';
-import NoFound from './Components/PublicPages/404Page';
-import Cart from './Components/PublicPages/Cart';
+import Home from './components/PublicPages/Home';
+import Footer from './components/PublicPages/Footer';
+import ProductList from './components/PublicPages/ProductList';
+import ProductDetail from './components/PublicPages/ProductDetail';
+import NoFound from './components/PublicPages/404Page';
+import Cart from './components/PublicPages/Cart';
 import decode from 'jwt-decode';
 import { setToken } from './Api/users'
 import store from './Redux/reducers/index';
-import Contact from './Components/PublicPages/Contact';
-import About from './Components/PublicPages/About';
-import WishList from './Components/PublicPages/WishList';
+import Contact from './components/PublicPages/Contact';
+import About from './components/PublicPages/About';
+import WishList from './components/PublicPages/WishList';
 
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);
