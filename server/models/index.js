@@ -2,8 +2,9 @@ import mongoose from 'mongoose'
 import Product from './Product'
 import Orders from './Orders'
 import Users from './Users'
+import { MONGO_URI } from "../config/keys";
 
-let dbURL = `mongodb+srv://comicom:sharp@cluster0-iabea.mongodb.net/test?retryWrites=true&w=majority`;
+let dbURL = MONGO_URI;
 
 function connect() {
     return mongoose.connect(dbURL, {

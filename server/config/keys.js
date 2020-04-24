@@ -1,5 +1,10 @@
-export const googleClientId= "884928480399-m1gm7ug78k736so3kcd9bpb0g4tebrhp.apps.googleusercontent.com"
-export const googleClientSecret= "yIUaR3VH9de-mdyL6tAfllAe";
-export const facebooAppId= "678264886269916";
-export const facebooClientSecret= "2dba2851cae1d9a445f56545e7a0a83f";
-export const CLOUDINARY_URL = "cloudinary://434927969291193:a3-0lafYdn0y6xCCrZorhZltT5M@comicom"
+export const googleClientId= process.env.googleClientId;
+export const googleClientSecret= process.env.googleClientSecret;
+export const facebooAppId= process.env.facebooAppId;
+export const facebooClientSecret= process.env.facebooClientSecret;
+export const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
+export const MONGO_URI = process.env.MONGO_URI;
+export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+export const NODEMAILER_KEY = process.env.NODEMAILER_KEY;
+export const NODEMAILER_DOMAIN = process.env.NODEMAILER_DOMAIN;

@@ -8,7 +8,8 @@ import './services/passport';
 import products from "./routes/products";
 import search from './routes/search'
 import payment from './routes/payment'
-
+import dotenv from 'dotenv'
+dotenv.config()
 
 //middlewares
 app.use(function (req, res, next) {

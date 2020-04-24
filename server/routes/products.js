@@ -4,10 +4,12 @@ import {Product} from '../models/index'
 import multer from 'multer'
 //import cloudinary from 'cloudinary/lib/v2'
 const cloudinary = require('cloudinary').v2
+import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } from "../config/keys";
+
 cloudinary.config({ 
     cloud_name: 'comicom', 
-    api_key: '434927969291193', 
-    api_secret: 'a3-0lafYdn0y6xCCrZorhZltT5M' 
+    api_key: CLOUDINARY_API_KEY, 
+    api_secret: CLOUDINARY_API_SECRET 
 });
 
 const storage = multer.diskStorage({
