@@ -78,6 +78,5 @@ export const deleteItemFromWishList = (id) => {
 
 export const sendMail = async (formInfo) => {
     let success = await sendMailToUs(formInfo)
-    console.log(formInfo)
     return success
 }

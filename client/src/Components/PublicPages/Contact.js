@@ -25,6 +25,7 @@ class Contact extends Component {
         let { name, email, subject, message} = this.state;
         if(name && email && subject && message){
             let message = sendMail(this.state)
+            console.log("message", message)
             if(message) {
                 toast('Mail Send, Will reply soon', {type: 'success'})
             }else {

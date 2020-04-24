@@ -4,13 +4,14 @@ import {authReducer} from "./auth"
 import {adminReducer} from "./admin"
 import {productReducer} from './product'
 import {featureReducer} from './feature'
+import {errorReducer} from './error'
 
 const rootReducers = combineReducers({
     auth: authReducer,
     product:productReducer,
     feature: featureReducer,
-    admin: adminReducer
-
+    admin: adminReducer,
+    error: errorReducer
 });
 
 const saveToLocalStorage = (state) =>{

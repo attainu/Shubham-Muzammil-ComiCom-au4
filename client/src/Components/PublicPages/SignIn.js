@@ -5,6 +5,9 @@ import { signUser } from '../../Redux/action_creators/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebookSquare, faGooglePlusG } from "@fortawesome/free-brands-svg-icons"
 import '../../styles/signin.css'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 let comic = 'https://res.cloudinary.com/comicom/image/upload/v1586243313/Pages%20Image/Signin-Signup/back_umhv8x.jpg';
 
@@ -23,6 +26,11 @@ class Signin extends Component {
 
     submitSignin=(e)=>{
         this.props.dispatch(signUser(this.state))
+        if(this.props.error) {
+            toast('SuccessFully logged in', {type: 'success'})
+        }else {
+            toast('Sorry, invalid credientials', {type : "error"})
+        }
     }
 
     render() {
@@ -69,7 +77,8 @@ class Signin extends Component {
 
 const mapStateToProps = (state)=>{
     return {
-        auth : state.auth
+        auth : state.auth,
+        error : state.error.message
     }
 }
 

@@ -1,7 +1,5 @@
 import { fetchUserAction, signinUser, signupUser, setToken, signoutUser } from '../../Api/users'
 
-//for sending list to store on first load
-
 export const setUserInfo = (userData) => {
   return {
     type: "SET_CURRENT_USER",
@@ -39,6 +37,7 @@ export const signUser = (formInfo) => {
       dispatch({type : "ADD_TO_WISHLIST_INITIAL", payload: info.data.user.wishList})
     } catch (error) {
       console.log("error in signinUser", error)
+      dispatch({type : "ADD_ERROR", payload : "error"})
     }
   }
 }

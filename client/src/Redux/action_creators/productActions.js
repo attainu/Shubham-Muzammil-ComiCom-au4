@@ -1,5 +1,4 @@
 import { fetchProducts, fetchAllProducts, fetchProductDetail } from '../../Api/product'
-import { addItemToCart, addItemToWishlist } from '../../Api/feature';
 
 //for sending product list to store
 export const putProducts = (productData) => {

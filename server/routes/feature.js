@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.put('/cart', controllers.addItemToUserCart);
 router.put('/wishlist', controllers.addItemToUserWishlist);
-router.post('/mail', controllers.sendMail);
+router.post('/mail', controllers.sendMailToUs);
 
 export default router;
