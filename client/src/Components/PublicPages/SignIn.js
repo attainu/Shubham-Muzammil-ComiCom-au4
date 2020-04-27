@@ -43,8 +43,8 @@ class Signin extends Component {
                     <div className="wrap-login100">
                         <div className="login100-form flex-sb flex-w">
                             <span className="login100-form-title p-b-53">Sign In With</span>
-                            <a href="http://localhost:9090/auth/facebook" className="btn-face m-b-20"><FontAwesomeIcon icon={faFacebookSquare}/>FaceBook</a>
-                            <a href="http://localhost:9090/auth/google" className="btn-google m-b-20"><FontAwesomeIcon icon={faGooglePlusG} color="red" />Google</a>
+                            <a href="/auth/facebook" className="btn-face m-b-20"><FontAwesomeIcon icon={faFacebookSquare}/>FaceBook</a>
+                            <a href="/auth/google" className="btn-google m-b-20"><FontAwesomeIcon icon={faGooglePlusG} color="red" />Google</a>
                             <div className="p-t-31 p-b-9">
 						        <span className="txt1">Email</span>
 					        </div>

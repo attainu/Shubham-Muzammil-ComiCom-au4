@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const fetchUserAction = async () => {
     try {
-        const response = await axios.get(`http://localhost:9090/auth/current`, { withCredentials: true });
+        const response = await axios.get(`/auth/current`, { withCredentials: true });
         return response;
     } catch (error) {
         console.error(error);
@@ -11,7 +11,7 @@ export const fetchUserAction = async () => {
 
 export const signupUser = async (formInfo) => {
     try {
-        const response = await axios.post(`http://localhost:9090/auth/register`, formInfo, { withCredentials: true });
+        const response = await axios.post(`/auth/register`, formInfo, { withCredentials: true });
         return response;
     } catch (error) {
         console.error(error);
@@ -20,7 +20,7 @@ export const signupUser = async (formInfo) => {
 
 export const signinUser = async (formInfo) => {
     try {
-        const response = await axios.post(`http://localhost:9090/auth/login`, formInfo, { withCredentials: true });
+        const response = await axios.post(`/auth/login`, formInfo, { withCredentials: true });
         return response;
     } catch (error) {
         console.error(error);
@@ -29,7 +29,7 @@ export const signinUser = async (formInfo) => {
 
 export const signoutUser = async () => {
     try {
-        const response = await axios.get(`http://localhost:9090/auth/logout`, { withCredentials: true });
+        const response = await axios.get(`/auth/logout`, { withCredentials: true });
         return response;
     } catch (error) {
         console.error(error);

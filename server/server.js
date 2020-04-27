@@ -12,7 +12,7 @@ import payment from './routes/payment'
 
 //middlewares
 app.use(function (req, res, next) {
-	res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+	res.header("Access-Control-Allow-Origin", "https://comicom.netlify.app/");
 	res.header("Access-Control-Allow-Credentials", "true");
 	res.header("Access-Control-Allow-Methods: PUT, GET, POST");
 	res.header(
@@ -23,7 +23,6 @@ app.use(function (req, res, next) {
 });
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-
 app.use(
 	cookieSession({
 		maxAge: 30 * 24 * 60 * 60 * 1000,

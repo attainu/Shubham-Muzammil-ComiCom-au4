@@ -34,7 +34,7 @@ class AddComic extends React.Component {
         data.append('itemsInStock', this.state.itemsInStock)
         data.append('publication',this.state.publication) 
         console.log(data)
-        axios.post("http://localhost:9090/products", data, { // receive two parameter endpoint url ,form data 
+        axios.post("/products", data, { // receive two parameter endpoint url ,form data 
         })
         .then(res => { // then print response status
             console.log(res.statusText)
