@@ -1,4 +1,4 @@
-import 'dotenv/config'
+//import 'dotenv/config'
 import express from 'express'
 const app = express();
 import routes from './routes/index'
@@ -40,6 +40,10 @@ app.use('/products', products)
 app.use('/search', search)
 app.use('/payment', payment)
 app.use('/feature', routes.feature);
+
+app.get('/', (req, res) => {
+	res.send("App is up and running")
+})
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
