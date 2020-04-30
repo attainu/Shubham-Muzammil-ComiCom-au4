@@ -8,18 +8,18 @@ router.get('/google',passport.authenticate('google', {
 }));
 
 // Successful authentication, redirect profile.
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:3000/signin' }),
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'https://comicom2020.herokuapp.com/signin' }),
   (req, res) => {
-  res.redirect('http://localhost:3000/');
+  res.redirect('https://comicom2020.herokuapp.com/');
 });
 
 router.get('/facebook',
   passport.authenticate('facebook')
 );
 
-router.get("/facebook/callback",passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/signin' }),
+router.get("/facebook/callback",passport.authenticate('facebook', { failureRedirect: 'https://comicom2020.herokuapp.com/signin' }),
 (req, res) => {
-  res.redirect('http://localhost:3000/');
+  res.redirect('https://comicom2020.herokuapp.com/');
 });
 
 router.post('/register', controllers.registerUser);

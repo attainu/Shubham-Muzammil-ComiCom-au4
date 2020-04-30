@@ -9,6 +9,7 @@ import './services/passport';
 import products from "./routes/products";
 import search from './routes/search'
 import payment from './routes/payment'
+import path from 'path'
 
 //middlewares
 app.use(function (req, res, next) {
@@ -40,13 +41,21 @@ app.use('/search', search)
 app.use('/payment', payment)
 app.use('/feature', routes.feature);
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
 	res.send("App is up and running")
-})
+}) */
 
 // Start the app on pre defined port number
 const env = process.env.NODE_ENV || 'default';
 const PORT = process.env.PORT || 9090;
+
+if(process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'))
+	app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+
 connect()
 	.then(function () {
 		app.listen(PORT, function () {

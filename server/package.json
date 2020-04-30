@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "babel-node server.js",
-    "dev": "nodemon --exec babel-node server.js"
+    "dev": "nodemon --exec babel-node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Shubham Ambastha , Muzammil Khan",
   "license": "ISC",
