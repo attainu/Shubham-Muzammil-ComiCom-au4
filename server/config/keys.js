@@ -1,0 +1,10 @@
+export const googleClientId= process.env.googleClientId;
+export const googleClientSecret= process.env.googleClientSecret;
+export const facebooAppId= process.env.facebooAppId;
+export const facebooClientSecret= process.env.facebooClientSecret;
+export const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
+export const MONGO_URI = process.env.MONGO_URI;
+export const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+export const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+export const NODEMAILER_KEY = process.env.NODEMAILER_KEY;
+export const NODEMAILER_DOMAIN = process.env.NODEMAILER_DOMAIN;
